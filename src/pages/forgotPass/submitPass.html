@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar no-border-bottom>
+    <ion-title>找回密码</ion-title>
+    <ion-buttons start>
+      <button ion-button color="dark" (tap)="navCtrl.pop()">
+        <ion-icon name="arrow-back" class="btn-back"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="submitPassForm" (submit)="submitPass(submitPassForm)">
+    <ion-list class="ion-list">
+      <ion-item>
+        <ion-icon name="key"></ion-icon>
+        <input type="password" placeholder="密码 (6-16位)" [formControl]="password"/>
+        <ion-icon name="close" item-right [hidden]="password.value.length == 0" (tap)="clearInput(submitPassForm, 'password')"></ion-icon>
+        <div class="error-box" *ngIf="password.hasError('required') && password.touched">请填写密码</div>
+        <div class="error-box" *ngIf="password.hasError('minlength') && password.touched">密码太短, 至少6位</div>
+        <div class="error-box" *ngIf="password.hasError('maxlength') && password.touched">密码太长, 最多16位</div>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="key"></ion-icon>
+        <input type="password" placeholder="重复密码" [formControl]="confirmPass"/>
+        <ion-icon name="close" item-right [hidden]="confirmPass.value.length == 0" (tap)="clearInput(submitPassForm, 'confirmPass')"></ion-icon>
+        <div class="error-box" *ngIf="confirmPass.hasError('required') && confirmPass.touched">请填写密码</div>
+        <div class="error-box" *ngIf="confirmPass.hasError('minlength') && confirmPass.touched">密码太短, 至少6位</div>
+        <div class="error-box" *ngIf="confirmPass.hasError('maxlength') && confirmPass.touched">密码太长, 最多16位</div>
+        <div class="error-box" *ngIf="confirmPass.hasError('passwordMismatch') && confirmPass.touched">两次密码输入不一致</div>
+      </ion-item>
+    </ion-list>
+
+    <div class="tips"><p class="pwd-tips">密码仅支持长度6-16个字符之间，大小写字母、数字的组合</p></div>
+    <div padding class="btn-register">
+      <button ion-button block type="submit" color="primary" [disabled]="!submitPassForm.valid">完成</button>
+    </div>
+  </form>
+</ion-content>

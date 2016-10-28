@@ -1,0 +1,13 @@
+page-personal {}
+page-personal .userHeader {position:relative; background-color: #66aa39; text-align: center; padding:30px 20px 20px; overflow: hidden;}
+page-personal .userHeader .ellipsis {display: block; text-overflow: ellipsis;  overflow: hidden;  white-space: nowrap;}
+page-personal .userHeader .userPic,.userPic img {display: inline-block; width:60px; height:60px; border-radius: 50%;}
+page-personal .userHeader .userName {font-size: 16px; font-weight: bold; margin-top: 5px; line-height: 24px; color:#282828;}
+
+page-personal .userInfo {background-color: #fff; width: 100%;}
+page-personal .userInfo .userInfo-list {display:-webkit-box;}
+page-personal .userInfo .userInfo-list li {position:relative; -webkit-box-flex:1; box-flex:1; padding:10px 55px; text-align: center; height: 60px; list-style-type: none; margin-left: -30px;}
+page-personal .userInfo .userInfo-list li:before {position:absolute; content:""; right:0; top:10%; height:80%; width:1px; background-color: #ddd;}
+page-personal .userInfo .userInfo-list li:last-child:before {width: 0;}
+page-personal .userInfo .userInfo-list li span {font-weight: 700; font-size: 1.6rem;}
+page-personal .userInfo .userInfo-list li p {font-size: 1.3rem; color: #5e5e5e;}

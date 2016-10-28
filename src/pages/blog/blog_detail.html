@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-title>资讯中心</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid *ngIf="blog">
+    <ion-row>
+      <ion-col>
+        <h2>{{blog.blog.title}}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-33>
+          {{blog.blog.blogCategory.name}}
+      </ion-col>
+      <ion-col width-33>
+        {{blog.blog.author}}
+      </ion-col>
+      <ion-col width-33>
+        {{blog.blog.publishDateString}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <p [innerHTML]="blog.information"></p>
+    </ion-row>
+
+    <ion-row>
+      <ion-col width-50 text-center>
+        <button ion-fab fab><ion-icon name="bonfire"></ion-icon></button>
+      </ion-col>
+      <ion-col width-50 text-center>
+        <button ion-fab fab ><ion-icon name="book"></ion-icon></button>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 5.5rem">
+      <ion-col width-50 text-center>{{blog.blog.countLike}}</ion-col>
+      <ion-col width-50 text-center>{{blog.blog.countWish}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

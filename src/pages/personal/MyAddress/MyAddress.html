@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar hideBackButton no-border-bottom>
+    <ion-buttons start>
+      <button ion-button color="dark" (click)="navCtrl.pop()"><ion-icon name="arrow-back" class="btn-back"></ion-icon></button>
+    </ion-buttons>
+    <ion-title text-center>管理收货地址</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="ion-list" no-border>
+    <ion-item *ngFor="let address of addresses">
+      <ion-card>
+        <ion-card-header>
+          <ion-row>
+            <ion-col width-67><span>{{address.contactUserName}}</span></ion-col>
+            <ion-col width-33><span>{{address.contractTel}}</span></ion-col>
+          </ion-row>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="address-context">{{address.province}}{{address.city}}{{address.area}}{{address.address}}</div>
+        </ion-card-content>
+      </ion-card>
+      <button ion-button outline small *ngIf="orderId" color="dark" class="btn" (tap)="orderSelect(address.id)">选择</button>
+      <button ion-button outline small color="dark" class="btn" (tap)="addEdit(address.id)">编辑</button>
+      <button ion-button outline small color="dark" class="btn" (tap)="delAddress(address.id)">删除</button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar no-border>
+    <button ion-button full color="danger" (click)="addEdit(null)">新增收货地址</button>
+  </ion-toolbar>
+</ion-footer>

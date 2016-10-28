@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar light no-border-bottom hideBackButton>
+    <ion-row class="filter-tab">
+      <ion-col width-33 text-center class="col" (tap)="switchSortType(1)"><span [class]="zhClass">赠品</span></ion-col>
+      <ion-col width-33 text-center class="col" (tap)="switchSortType(2)"><span [class]="xlClass">促销</span></ion-col>
+      <ion-col width-33 text-center class="col" (tap)="switchSortType(3)"><span [class]="jgClass">分期<i [class]="upOrDown"></i></span></ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list no-lines no-margin no-padding no-border class="ion-list">
+    <ion-item>
+      <ion-row wrap>
+        <ion-col *ngFor="let item of items" class="item-col" width-50>
+          <img (tap)="goToProductPage(item.id)" [src]="item.imageUrl"/>
+          <div class="text">{{item.name}}</div>
+          <div class="sellInfo">
+            <div class="price"><span style="color:red;font-size:18px;">￥{{item.distPrice}}</span> <span class="line-through">￥{{item.price}}</span></div>
+            <div *ngIf="item.category.id == 3">月销{{item.countSale}}笔<span style="color:red;font-size:18px;">分6-12期付</span></div>
+            <div *ngIf="item.category.id != 3">月销{{item.countSale}}笔</div>
+          </div>
+        </ion-col>
+
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

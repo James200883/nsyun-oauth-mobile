@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar hideBackButton no-border-bottom>
+    <ion-buttons start>
+      <button ion-button color="dark" (click)="navCtrl.pop();"><ion-icon name="arrow-back" class="btn-back"></ion-icon></button>
+    </ion-buttons>
+    <ion-title text-center>我推荐的会员</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="ion-list">
+    <ion-item *ngFor="let recommendMember of recommendMembers">
+      <ion-avatar item-left>
+        <img src="{{recommendMember.userFollowed.imageUrl}}">
+      </ion-avatar>
+      <h2>{{recommendMember.userFollowed.realname}}</h2>
+      <p>{{recommendMember.userFollowed.mobile}}</p>
+      <ion-note item-right>{{recommendMember.userFollowed.createDateStr}}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

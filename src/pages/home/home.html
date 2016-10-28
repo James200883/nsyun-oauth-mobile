@@ -1,0 +1,84 @@
+<ion-content>
+  <ion-slides pager [options]="options" class="slide-image">
+    <ion-slide *ngFor="let slide of slides">
+      <img [src]="slide.impageUrl"/>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-row class="row">
+    <ion-col width-25>
+      <button ion-fab color="secondary" (click)="openPage(1)"><ion-icon name="analytics"></ion-icon></button>
+      <div><span>个人中心</span></div>
+    </ion-col>
+    <ion-col width-25>
+      <button ion-fab color="danger" (click)="openPage(2)"><ion-icon name="cart"></ion-icon></button>
+      <div><span>促销产品</span></div>
+    </ion-col>
+    <ion-col width-25>
+      <button ion-fab color="primary" (click)="openPage(3)"><ion-icon name="cash"></ion-icon></button>
+      <div><span>会员认证</span></div>
+    </ion-col>
+    <ion-col width-25>
+      <button ion-fab color="cyan" (click)="openPage(4)"><ion-icon name="locate"></ion-icon></button>
+      <div><span>最新资讯</span></div>
+    </ion-col>
+  </ion-row>
+
+  <ion-list no-lines class="ion-list">
+    <ion-list-header text-center><h2 color="primary">赠品</h2></ion-list-header>
+    <ion-item>
+      <ion-row wrap class="item-detail">
+        <ion-col *ngFor="let zpItem of zpData" class="col-detail" width-50>
+          <img (click)="goToProductPage(zpItem.data.id)" [src]="zpItem.pageAds.impageUrl"/>
+          <div class="ellipsis-text">{{zpItem.data.name}}</div>
+          <div class="sell-info">
+            <div class="price">
+              <span class="dis-price">￥{{zpItem.data.distPrice}}</span>
+              <span class="origin-price">￥{{zpItem.data.price}}</span>
+            </div>
+            <p>已赠{{zpItem.data.countSale}}件</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <ion-list no-lines class="ion-list">
+    <ion-list-header text-center><h2 color="primary">限时抢购</h2></ion-list-header>
+    <ion-item>
+      <ion-row wrap class="item-detail">
+        <ion-col *ngFor="let cxItem of cxData"  class="col-detail" width-50>
+          <img (click)="goToProductPage(cxItem.data.id)" [src]="cxItem.pageAds.impageUrl"/>
+          <div class="ellipsis-text">{{cxItem.data.name}}</div>
+          <div class="sell-info">
+            <div class="price">
+              <span class="dis-price">￥{{cxItem.data.distPrice}}</span>
+              <span class="origin-price">￥{{cxItem.data.price}}</span>
+            </div>
+            <p>月销{{cxItem.data.countSale}}笔</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <ion-list no-lines class="ion-list">
+    <ion-list-header text-center><h2 color="primary">分期产品申请</h2></ion-list-header>
+    <ion-item>
+      <ion-row wrap class="item-detail">
+        <ion-col *ngFor="let fqItem of fqData"  class="col-detail" width-50>
+          <img (click)="goToProductPage(fqItem.data.id)" [src]="fqItem.pageAds.impageUrl"/>
+          <div class="ellipsis-text">{{fqItem.data.name}}</div>
+          <div class="sell-info">
+            <div class="price">
+              <span class="dis-price">￥{{fqItem.data.distPrice}}</span>
+              <span class="origin-price">￥{{fqItem.data.price}}</span>
+            </div>
+            <div class="tips">最高可分24期, 12期内免息</div>
+            <p>月销{{fqItem.data.countSale}}笔</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

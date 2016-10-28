@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-title>订单</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row no-padding *ngIf="orders">
+          <ion-col width-67 style="vertical-align: middle">
+            <div>订单编号:{{orders.orderNo}}</div>
+            <div>订单日期:{{orders.createdDateString}}</div>
+          </ion-col>
+          <ion-col width-33 style="vertical-align: middle">
+            <div>类型:{{orders.orderTypeString}}</div>
+            <div>支付金额:{{orders.payAmount}}</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item *ngFor="let item of orderItems">
+      <ion-thumbnail item-left>
+        <img [src]="item.imageUrl">
+      </ion-thumbnail>
+      <h2>{{item.productName}}</h2>
+      <p>Price : ${{item.distPrice}} x {{item.qty}} = ${{item.distPrice * item.qty}}</p>
+    </ion-item>
+
+    <ion-item *ngIf="productCount" >
+      <h2>总计</h2>
+      <h2 item-right >${{orders.amount}}</h2>
+    </ion-item>
+
+    <ion-item *ngIf="!productCount" >
+      <h2 class="center">订单为空</h2>
+    </ion-item>
+  </ion-list>
+</ion-content>

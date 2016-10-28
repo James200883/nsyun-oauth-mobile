@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-navbar hideBackButton no-border-bottom>
+    <ion-title>我</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="userHeader">
+    <div *ngIf="userData != null">
+      <a class="userPic" *ngIf="userData.imageUrl"><img src="{{userData.imageUrl}}"/></a>
+      <a class="userPic" *ngIf="!userData.imageUrl"><img src="http://www.qdaily.com/images/missing_face.png"/></a>
+      <p class="userName ellipsis">{{userData.realname}}</p>
+    </div>
+
+    <div *ngIf="userData == null">
+      <a class="userPic" href="javascript:void(0)"><img src="http://www.qdaily.com/images/missing_face.png"/></a>
+      <p class="userName ellipsis">未知的人类</p>
+    </div>
+  </div>
+
+  <div class="userInfo">
+    <ul class="userInfo-list" *ngIf="userData != null">
+      <li><span>{{userData.amount}}</span><p>余额</p></li>
+      <li><span>{{userData.couponCount}}</span><p>优惠券</p></li>
+      <li><span>{{userData.userPoint}}</span><p>积分</p></li>
+    </ul>
+
+    <ul class="userInfo-list" *ngIf="userData == null">
+      <li><span>0</span><p>余额</p></li>
+      <li><span>0</span><p>优惠券</p></li>
+      <li><span>0</span><p>积分</p></li>
+    </ul>
+  </div>
+
+  <ion-list>
+    <button ion-item (click)="openDetails(1)">
+      <ion-icon name="card" item-left></ion-icon>
+      我的订单
+    </button>
+
+    <button ion-item (click)="openDetails(2)">
+      <ion-icon name="locate" item-left></ion-icon>
+      我的收货地址
+    </button>
+
+    <button ion-item (click)="openDetails(3)">
+      <ion-icon name="person" item-left></ion-icon>
+      我推荐的会员
+    </button>
+
+    <button ion-item (click)="openDetails(4)">
+      <ion-icon name="cash" item-left></ion-icon>
+      我的优惠券
+    </button>
+
+    <button ion-item (click)="openDetails(5)">
+      <ion-icon name="mail" item-left></ion-icon>
+      我的消息
+    </button>
+
+    <button ion-item (click)="openDetails(10)">
+      <ion-icon name="contact" item-left></ion-icon>
+      认证信息
+    </button>
+
+    <button ion-item (click)="openDetails(6)">
+      <ion-icon name="settings" item-left></ion-icon>
+      设置
+    </button>
+  </ion-list>
+</ion-content>

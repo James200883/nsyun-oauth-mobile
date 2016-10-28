@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-title>资讯中心</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <!--
+  <ion-fab left top>
+    <button ion-fab (click)="changeCate(-1)" [color]="cateColorAll">滚动</button>
+    <ion-fab-list side="right">
+      <button ion-fab (click)="changeCate(1)" [color]="cateColor1">资讯新闻</button>
+      <button ion-fab (click)="changeCate(2)" [color]="cateColor2">惠农政策</button>
+      <button ion-fab (click)="changeCate(3)" [color]="cateColor3">农业科技</button>
+    </ion-fab-list>
+  </ion-fab>
+  //-->
+
+  <ion-row class="row">
+    <ion-col width-25>
+      <button ion-button color="secondary" (click)="changeCate(-1)" >滚动</button>
+    </ion-col>
+    <ion-col width-25>
+      <button  ion-button color="danger" (click)="changeCate(1)">资讯新闻</button>
+    </ion-col>
+    <ion-col width-25>
+      <button ion-button color="primary" (click)="changeCate(2)">惠农政策</button>
+    </ion-col>
+    <ion-col width-25>
+      <button ion-button color="cyan" (click)="changeCate(3)">农业科技</button>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-list>
+
+    <ion-item *ngFor="let blog of blogs; let ind = index">
+      <ion-thumbnail item-left>
+        <img [src]="blog.imageUrl">
+      </ion-thumbnail>
+      <h2>{{blog.title}}</h2>
+      <p>{{blog.blogCategory.name}} {{blog.author}} {{blog.publishDateString}} </p>
+      <button clear item-right (click)="goBlogDetail(blog.id)"><ion-icon name="flame"></ion-icon></button>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasMore">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

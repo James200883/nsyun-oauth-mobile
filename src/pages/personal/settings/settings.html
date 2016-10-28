@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar hideBackButton no-border-bottom>
+    <ion-buttons start>
+      <button ion-button color="dark" (click)="navCtrl.pop()"><ion-icon name="arrow-back" class="btn-back"></ion-icon></button>
+    </ion-buttons>
+    <ion-title text-center>个人资料</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="list-user" *ngIf="userInfo">
+    <button ion-item (click)="updateHeadImage()">
+      <span>头像</span>
+      <ion-avatar item-right class="head-img">
+        <img [src]="imageUrl"/>
+      </ion-avatar>
+    </button>
+
+    <button ion-item (click)="updateName()">
+      <span>昵称</span>
+      <span item-right>{{userInfo.realname}}</span>
+    </button>
+
+    <button ion-item (click)="updateSex()">
+      <span>性别</span>
+      <span item-right *ngIf="userSex == 1">男</span>
+      <span item-right *ngIf="userSex == 2">女</span>
+      <span item-right *ngIf="userSex == 3">保密</span>
+    </button>
+
+    <button ion-item [disabled]="true">
+      <span>手机号码</span>
+      <span item-right>{{userInfo.mobile}}</span>
+    </button>
+  </ion-list>
+
+  <button ion-button full outline color="light" (click)="logout()" class="btn-logout">退出登录</button>
+</ion-content>

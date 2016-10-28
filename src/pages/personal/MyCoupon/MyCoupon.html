@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar hideBackButton no-border-bottom>
+    <ion-buttons start>
+      <button ion-button color="dark" (click)="navCtrl.pop()"><ion-icon name="arrow-back" class="btn-back"></ion-icon></button>
+    </ion-buttons>
+    <ion-title text-center>我的优惠券</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="coupon">
+    <div class="stamp stamp03" *ngFor="let cou of couponData">
+      <div class="par"><p>优惠券</p><sub class="sign">￥</sub><span>{{cou.amount}}</span><sub>元券</sub><p><!-- 订单满100.00元 --></p></div>
+      <div class="copy">有效时间<p><label>{{cou.coupon.startDateStr}}</label><br>至<br><label>{{cou.coupon.endDateStr}}</label></p></div>
+      <i></i>
+    </div>
+
+    <div class="no-coupon" *ngIf="!couponData"><p>您还没有优惠券哦~~</p></div>
+  </div>
+</ion-content>
