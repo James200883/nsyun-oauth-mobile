@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <button ion-button full *ngIf="productCount" (click)="checkout()">
+  <button ion-button full color="danger" *ngIf="productCount" (click)="checkout()">
     <ion-icon name="ios-cart"></ion-icon>
     购买
   </button>
@@ -18,10 +18,10 @@
       <h2>{{item.productName}}</h2>
       <p>价格 : ${{item.distPrice}} x {{item.qty}} = ${{item.distPrice * item.qty}}</p>
 
-      <button ion-button icon-only item-right (click)="quantityPlus(item)" ><ion-icon name="arrow-dropup-circle"></ion-icon></button>
+      <button ion-button icon-only item-right clear (click)="quantityPlus(item)" ><ion-icon name="arrow-dropup"></ion-icon></button>
       <button ion-button  item-right >{{item.qty}}</button>
-      <button ion-button icon-only item-right (click)="quantityMinus(item)" ><ion-icon name="arrow-dropdown-circle"></ion-icon></button>
-      <button ion-button icon-only item-right (click)="removeItemFromCart(item)" ><ion-icon name="remove-circle"></ion-icon></button>
+      <button ion-button icon-only item-right clear (click)="quantityMinus(item)" ><ion-icon name="arrow-dropdown"></ion-icon></button>
+      <button ion-button icon-only item-right clear (click)="removeItemFromCart(item)" ><ion-icon name="remove-circle"></ion-icon></button>
     </ion-item>
 
     <ion-item *ngIf="productCount > 0" >
@@ -38,7 +38,7 @@
   <ion-grid>
     <ion-row>
       <ion-col width-50 offset-50>
-        <button ion-button item-right  *ngIf="productCount > 0" (click)="checkout()">立即购买</button>
+        <button ion-button item-right color="danger" *ngIf="productCount > 0" (click)="checkout()">立即购买</button>
       </ion-col>
 
     </ion-row>

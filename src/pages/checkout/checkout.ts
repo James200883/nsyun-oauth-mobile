@@ -2,7 +2,7 @@
  * Created by hevan on 16/9/25.
  */
 import {Component} from '@angular/core';
-import { Platform, NavParams, NavController} from 'ionic-angular';
+import { NavParams, NavController} from 'ionic-angular';
 import {Http,URLSearchParams} from '@angular/http';
 import {CommonServices} from "../../commons/services/CommonServices";
 import {MyAddressPage} from "../personal/MyAddress/MyAddress";
@@ -22,7 +22,6 @@ export class CheckoutPage {
   public addrShow:string = '';
 
   constructor(
-    public platform: Platform,
     public params: NavParams,
     public commonService: CommonServices,
     public http:Http,
