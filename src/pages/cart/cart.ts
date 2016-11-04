@@ -99,16 +99,9 @@ export class CartPage {
   }
 
   quantityMinus(item){
-    if(item.sellCount > 1){
+    if(item.qty > 1){
       this.quantityChange(item,-1);
-    } else {
-      let removeAlert = this.alerCtrl.create({
-        title: 'Error',
-        subTitle: 'Quantity is 1, you cant reduce it, if you want to remove, please press remove button.',
-        buttons: ['Ok']
-      });
-      removeAlert.present();
-    }
+    } 
   }
 
   checkout(){
@@ -116,22 +109,26 @@ export class CartPage {
     this.storage.get(Keys.USER_INFO_KEY).then((userInfo) => {
       if (userInfo) {
          userId =userInfo.id;
+
+        let body = {userId:userId, orderType:1,items:this.cartList};
+        this.http.post(Keys.SERVICE_URL + '/orders/genOrder', JSON.stringify(body),{headers:Keys.HEADERS})
+          .subscribe(res => {
+            let retData = res.json();
+            console.log(retData);
+            if(retData.success === 'true'){
+              this.navCtrl.push(CheckoutPage, {'orderId':retData.orderId});
+            }else{
+              this.commonService.showAlert(retData.message, this.alerCtrl);
+            }
+          });
+
+
+
       } else {
         this.navCtrl.push(LoginPage);
       }
     });
 
-    let body = {userId:userId, orderType:1,items:this.cartList};
-    this.http.post(Keys.SERVICE_URL + '/orders/genOrder', JSON.stringify(body),{headers:Keys.HEADERS})
-      .subscribe(res => {
-        let retData = res.json();
-        console.log(retData);
-        if(retData.success === 'true'){
-          this.navCtrl.push(CheckoutPage, {'orderId':retData.orderId});
-        }else{
-          this.commonService.showAlert(retData.message, this.alerCtrl);
-        }
-      });
 
   }
 }

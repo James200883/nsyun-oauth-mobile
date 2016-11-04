@@ -24,6 +24,7 @@
     </ion-col>
   </ion-row>
 
+  <!--
   <ion-list no-lines class="ion-list">
     <ion-list-header text-center><h2 color="primary">赠品</h2></ion-list-header>
     <ion-item>
@@ -42,6 +43,7 @@
       </ion-row>
     </ion-item>
   </ion-list>
+  //-->
 
   <ion-list no-lines class="ion-list">
     <ion-list-header text-center><h2 color="primary">限时抢购</h2></ion-list-header>
@@ -63,7 +65,7 @@
   </ion-list>
 
   <ion-list no-lines class="ion-list">
-    <ion-list-header text-center><h2 color="primary">分期产品申请</h2></ion-list-header>
+    <ion-list-header text-center><h2 color="primary">惠农产品申请</h2></ion-list-header>
     <ion-item>
       <ion-row wrap class="item-detail">
         <ion-col *ngFor="let fqItem of fqData"  class="col-detail" width-50>
@@ -74,7 +76,7 @@
               <span class="dis-price">￥{{fqItem.data.distPrice}}</span>
               <span class="origin-price">￥{{fqItem.data.price}}</span>
             </div>
-            <div class="tips">最高可分24期, 12期内免息</div>
+            <div class="tips"></div>
             <p>月销{{fqItem.data.countSale}}笔</p>
           </div>
         </ion-col>

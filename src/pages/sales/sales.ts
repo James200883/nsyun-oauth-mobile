@@ -11,11 +11,11 @@ import {ProductPage} from "../product/product";
   providers: [CommonServices]
 })
 export class SalesPage {
-  zhClass: string = 'cur';
-  xlClass: string;
+  zhClass: string ;
+  xlClass: string = 'cur';
   jgClass: string = 'sortPrice';
   upOrDown: string = '';
-  curCategoryNo:string='10';
+  curCategoryNo:string='20';
   items:any;
 
   constructor(private navCtrl: NavController, private http: Http, private commonService: CommonServices, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
