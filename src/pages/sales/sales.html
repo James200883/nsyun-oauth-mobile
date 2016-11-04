@@ -9,19 +9,21 @@
 </ion-header>
 
 <ion-content>
-  <ion-list no-lines no-margin no-padding no-border class="ion-list">
+  <ion-list no-lines class="ion-list">
     <ion-item>
-      <ion-row wrap>
-        <ion-col *ngFor="let item of items" class="item-col" width-50>
+      <ion-row wrap class="item-detail">
+        <ion-col *ngFor="let item of items" class="col-detail" width-50>
           <img (tap)="goToProductPage(item.id)" [src]="item.imageUrl"/>
-          <div class="text">{{item.name}}</div>
-          <div class="sellInfo">
-            <div class="price"><span style="color:red;font-size:18px;">￥{{item.distPrice}}</span> <span class="line-through">￥{{item.price}}</span></div>
-            <div *ngIf="item.category.id == 3">月销{{item.countSale}}笔<span style="color:red;font-size:18px;">惠农</span></div>
-            <div *ngIf="item.category.id != 3">月销{{item.countSale}}笔</div>
+          <div class="ellipsis-text">{{item.name}}</div>
+          <div class="sell-info">
+            <div class="price">
+              <span class="dis-price">￥{{item.distPrice}}</span>
+              <span class="origin-price">￥{{item.price}}</span>
+            </div>
+            <p *ngIf="item.category.id == 3">月销{{item.countSale}}笔<span class="product-special">惠农</span></p>
+            <p *ngIf="item.category.id != 3">月销{{item.countSale}}笔</p>
           </div>
         </ion-col>
-
       </ion-row>
     </ion-item>
   </ion-list>
