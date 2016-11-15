@@ -5,7 +5,7 @@ export class OrderItem {
    productId:number;
    name:string;
    imageUrl:string;
-   spec:string;
+   sku:string;
    qty:number;
    price:number;
    distPrice:number;

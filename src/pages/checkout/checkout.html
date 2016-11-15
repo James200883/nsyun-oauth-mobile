@@ -26,12 +26,13 @@
         <img [src]="item.imageUrl">
       </ion-thumbnail>
       <h2>{{item.name}}</h2>
-      <p>Price : ${{item.distPrice}} x {{item.qty}} = ${{item.distPrice * item.qty}}</p>
+      <p>Price : ￥{{item.distPrice}} x {{item.qty}} = ￥{{item.distPrice * item.qty}}</p>
+      <p *ngIf="item.sku">SKU:{{item.sku}}</p>
     </ion-item>
 
     <ion-item *ngIf="productCount">
       <h2>总计</h2>
-      <h2 item-right >${{orders.amount}}</h2>
+      <h2 item-right >￥{{orders.amount}}</h2>
     </ion-item>
 
     <button ion-item (tap)="goAddress()">

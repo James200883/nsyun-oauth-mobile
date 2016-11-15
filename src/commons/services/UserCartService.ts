@@ -97,7 +97,7 @@ export class UserCartService {
         items = res;
         var result = -1;
         for (var i = 0; i < items.length; i++) {
-          if (items[i].productId == orderItem.productId) {
+          if (items[i].productId == orderItem.productId && items[i].sku == orderItem.sku) {
             result = i;
             console.log('start return');
             return result;

@@ -16,7 +16,8 @@
         <img [src]="item.imageUrl">
       </ion-thumbnail>
       <h2>{{item.productName}}</h2>
-      <p>价格 : ${{item.distPrice}} x {{item.qty}} = ${{item.distPrice * item.qty}}</p>
+      <p>价格:￥{{item.distPrice}} x {{item.qty}} = ￥{{item.distPrice * item.qty}}</p>
+      <p *ngIf="item.sku">SKU:{{item.sku}}</p>
 
       <button ion-button icon-only item-right clear (click)="quantityPlus(item)" ><ion-icon name="arrow-dropup"></ion-icon></button>
       <button ion-button  item-right >{{item.qty}}</button>
@@ -26,7 +27,7 @@
 
     <ion-item *ngIf="productCount > 0" >
       <h2>合计:</h2>
-      <h2 item-right >${{totalAmount}}</h2>
+      <h2 item-right >￥{{totalAmount}}</h2>
     </ion-item>
 
     <ion-item *ngIf="!productCount" >

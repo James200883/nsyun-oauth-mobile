@@ -18,6 +18,16 @@
         {{productInfo.product.summary}}
       </p>
       <ion-grid>
+
+        <ion-row no-padding wrap >
+
+          <ion-col width-20 *ngFor="let skuItem of productInfo.product.skuItems">
+            <button ion-button *ngIf="skuItem.name == sku" color="danger"  (click)="switchSku(skuItem.name)">{{skuItem.name}}</button>
+            <button ion-button *ngIf="skuItem.name != sku"  (click)="switchSku(skuItem.name)">{{skuItem.name}}</button>
+          </ion-col>
+
+        </ion-row>
+
         <ion-row no-padding>
           <ion-col width-67 style="vertical-align: middle">
             <div>

@@ -52,15 +52,17 @@ export class CartPage {
   }
 
   removeItemFromCart(item){
-    let newItems = new Array<OrderItem>();
+    let newItems = [];
+
     for(var i=0;i<this.cartList.length;i++){
       let deItem = this.cartList[i];
-      if(deItem.productId == item.productId){
+      if(deItem.productId == item.productId && deItem.sku == item.sku){
 
       }else{
         newItems.push(deItem);
       }
     }
+
     this.cartList = newItems;
 
     this.calcChange();
@@ -74,14 +76,16 @@ export class CartPage {
     let amount = 0.00;
     for(var i=0;i<this.cartList.length;i++){
       let deItem = this.cartList[i];
-      if(deItem.productId == item.productId){
+      if(deItem.productId == item.productId && deItem.sku == item.sku){
         deItem.qty = deItem.qty + qty;
         amount += deItem.distPrice * deItem.qty;
       }
     }
-    this.totalAmount = amount;
+    //this.totalAmount = amount;
 
     this.userCartService.saveItems(this.cartList);
+
+    this.calcChange();
   }
 
   calcChange(){
@@ -101,7 +105,7 @@ export class CartPage {
   quantityMinus(item){
     if(item.qty > 1){
       this.quantityChange(item,-1);
-    } 
+    }
   }
 
   checkout(){
