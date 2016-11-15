@@ -19,7 +19,7 @@
 
   <ion-row class="row">
     <ion-col width-25>
-      <button ion-button color="secondary" (click)="changeCate(-1)" >滚动</button>
+      <button ion-button color="secondary" (click)="changeCate(-1)" >全部</button>
     </ion-col>
     <ion-col width-25>
       <button  ion-button color="danger" (click)="changeCate(1)">资讯新闻</button>
@@ -41,7 +41,7 @@
       </ion-thumbnail>
       <h2><button ion-button clear (click)="goBlogDetail(blog.id)" >{{blog.title}}</button></h2>
       <p>{{blog.blogCategory.name}} {{blog.author}} {{blog.publishDateString}} </p>
-      <button clear item-right (click)="goBlogDetail(blog.id)" color="blue"><ion-icon name="bonfire"></ion-icon></button>
+      <button clear item-right (click)="goBlogDetail(blog.id)" color="blue"><ion-icon name="arrow-forward"></ion-icon></button>
     </ion-item>
 
   </ion-list>

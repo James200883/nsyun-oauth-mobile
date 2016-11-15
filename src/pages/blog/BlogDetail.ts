@@ -42,5 +42,29 @@ export class BlogDetailPage {
       this.commonService.showToast('服务器或网络异常', 'center');
     });
   }
+
+  addBlogCount(id, type){
+    let params = new URLSearchParams();
+    params.set('id', id+'');
+    params.set('type', type);
+
+
+    this.http.post(Keys.SERVICE_URL +'/blog/blogLike', {headers:Keys.HEADERS},{search:params})
+      .subscribe(res => {
+        let retData = res.json();
+        console.log(retData);
+        if(retData.success === 'true'){
+
+          if(type == 'like'){
+            this.blog.countLike +=1;
+          }else{
+            this.blog.countWish +=1;
+          }
+
+        }else{
+
+        }
+      });
+  }
 }
 
