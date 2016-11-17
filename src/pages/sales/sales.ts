@@ -11,7 +11,7 @@ import {ProductPage} from "../product/product";
   providers: [CommonServices]
 })
 export class SalesPage {
-  zhClass: string ;
+  zhClass: string;
   xlClass: string = 'cur';
   jgClass: string = 'sortPrice';
   upOrDown: string = '';
@@ -22,16 +22,11 @@ export class SalesPage {
     this.loadData();
   }
 
-  ionViewWillEnter () {
-    document.querySelector('#tabs .tabbar')['style'].display = 'flex';
-  }
-
   loadData(){
     let params = new URLSearchParams();
     params.set('categoryNo',this.curCategoryNo);
-    this.http.get(Keys.SERVICE_URL +'/product/findProductByCategory', {search:params}) .subscribe(res => {
+    this.http.get(Keys.SERVICE_URL +'/product/findProductByCategory', {search:params}).subscribe(res => {
       this.items = res.json();
-      console.log(this.items);
     });
   }
 
@@ -65,15 +60,10 @@ export class SalesPage {
         this.curCategoryNo = "30";
         break;
     }
-
     this.loadData();
-
   }
 
   goToProductPage(productId){
-
-    console.log(productId);
     this.navCtrl.push(ProductPage,{id:productId});
   }
-
 }

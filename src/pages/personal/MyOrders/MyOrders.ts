@@ -5,6 +5,7 @@ import {NavController, LoadingController, AlertController} from "ionic-angular";
 import {CommonServices} from "../../../commons/services/CommonServices";
 import {Keys} from "../../../commons/constants/Keys";
 import {LoginPage} from "../../login/login";
+import {CheckoutPage} from "../../checkout/checkout";
 
 @Component({
   selector: 'page-my-orders',
@@ -107,8 +108,10 @@ export class MyOrdersPage {
   }
 
   /**
-   * 去支付 TODO
+   * 去支付
    * @param order
    */
-  goPay (order) {}
+  goPay (order) {
+    this.navCtrl.push(CheckoutPage, {orderId: order.orderId, userId: this.userId});
+  }
 }

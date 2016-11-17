@@ -16,12 +16,8 @@ import {AddEditAddressPage} from "./AddEditAddress";
 export class MyAddressPage {
   addresses = [];
   private userId: string;
-  private orderId:string = '';
-
 
   constructor (public navCtrl: NavController, public params: NavParams, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private http: Http, private storage: Storage, private commonService: CommonServices) {
-
-    this.orderId =  params.get('orderId');
     this.storage.get(Keys.USER_INFO_KEY).then((userInfo) => {
       if (userInfo) {
         this.userId = userInfo.id;
@@ -70,21 +66,5 @@ export class MyAddressPage {
    */
   addEdit (addressId: string) {
     this.navCtrl.push(AddEditAddressPage, {addressId: addressId, userId: this.userId});
-  }
-
-
-  orderSelect(addressId:string){
-    let params = new URLSearchParams();
-    params.set('orderId', this.orderId);
-    params.set('addrId', addressId);
-
-
-    this.http.post(Keys.SERVICE_URL + '/orders/updateOrderAddress', {headers: Keys.HEADERS}, {search: params}).subscribe((res) => {
-      if (res.json().success == 'true') {
-        this.navCtrl.pop();
-      } else {
-        this.commonService.showToast('设置地址', 'center');
-      }
-    });
   }
 }

@@ -8,12 +8,12 @@
   <div class="userHeader">
     <div *ngIf="userData != null">
       <a class="userPic" *ngIf="userData.imageUrl"><img src="{{userData.imageUrl}}"/></a>
-      <a class="userPic" *ngIf="!userData.imageUrl"><img src="http://www.qdaily.com/images/missing_face.png"/></a>
+      <a class="userPic" *ngIf="!userData.imageUrl"><img src="assets/images/head.png"/></a>
       <p class="userName ellipsis">{{userData.realname}}</p>
     </div>
 
     <div *ngIf="userData == null">
-      <a class="userPic" href="javascript:void(0)"><img src="http://www.qdaily.com/images/missing_face.png"/></a>
+      <a class="userPic" href="javascript:void(0)"><img src="assets/images/head.png"/></a>
       <p class="userName ellipsis">未知的人类</p>
     </div>
   </div>

@@ -1,15 +1,22 @@
 <ion-header>
   <ion-navbar hideBackButton no-border-bottom>
     <ion-buttons start>
-      <button ion-button color="dark" (click)="navCtrl.pop()"><ion-icon name="arrow-back" class="btn-back"></ion-icon></button>
+      <button ion-button color="dark" (tap)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
     </ion-buttons>
-    <ion-title text-center>管理收货地址</ion-title>
+
+    <ion-title text-center>收货地址</ion-title>
+
+    <ion-buttons end>
+      <button ion-button color="dark" clear (click)="addressManager()">管理</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list class="ion-list" no-border>
-    <ion-item *ngFor="let address of addresses">
+    <ion-item *ngFor="let address of addresses" (click)="selectAddress(address)">
       <ion-card>
         <ion-card-header>
           <ion-row>
@@ -21,14 +28,6 @@
           <div class="address-context">{{address.province}}{{address.city}}{{address.area}}{{address.address}}</div>
         </ion-card-content>
       </ion-card>
-      <button ion-button outline small color="dark" class="btn" (tap)="addEdit(address.id)">编辑</button>
-      <button ion-button outline small color="dark" class="btn" (tap)="delAddress(address.id)">删除</button>
     </ion-item>
   </ion-list>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar no-border>
-    <button ion-button full color="danger" (click)="addEdit(null)">新增收货地址</button>
-  </ion-toolbar>
-</ion-footer>

@@ -22,35 +22,27 @@ export class HomePage {
   cartCount:number = 0;
 
   constructor(private navCtrl: NavController, private storage:Storage, private http: Http, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
+    let params = new URLSearchParams();
+    params.set('pagePos', 'page_home');
+    this.http.get(Keys.SERVICE_URL + '/pageAds/findPagePosData', {search:params}).subscribe(res => {
+      let retData = res.json();
+      this.slides = retData.bannerData;
 
-    this.loadData();
-  }
+      this.zpData = retData.pagePosData1;
 
-  goToProductPage(productId){
-    this.navCtrl.push(ProductPage,{id:productId});
+      this.cxData = retData.pagePosData2;
+
+      this.fqData = retData.pagePosData3;
+    });
   }
 
   ionViewWillEnter () {
     document.querySelector('#tabs .tabbar')['style'].display = 'flex';
   }
 
-  loadData(){
-    let params = new URLSearchParams();
-    params.set('pagePos', 'page_home');
-    this.http.get(Keys.SERVICE_URL + '/pageAds/findPagePosData', {search:params})
-      .subscribe(res => {
-        let retData = res.json();
-        this.slides = retData.bannerData;
-
-        this.zpData = retData.pagePosData1;
-
-        this.cxData = retData.pagePosData2;
-
-        this.fqData = retData.pagePosData3;
-      });
+  goToProductPage(productId){
+    this.navCtrl.push(ProductPage,{id:productId});
   }
-
-
 
   formatBigDecimal(data){
     return parseFloat(data).toFixed(2);

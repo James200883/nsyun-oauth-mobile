@@ -1,134 +1,160 @@
-import { Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {Http} from '@angular/http';
-import { NavController, AlertController} from 'ionic-angular';
+import {NavController, AlertController, LoadingController, NavParams} from 'ionic-angular';
 import {CommonServices} from "../../commons/services/CommonServices";
 import {UserCartService} from "../../commons/services/UserCartService";
-import {OrderItem} from "../../commons/constants/OrderItem";
-import {Keys} from "../../commons/constants/Keys";
-import {CheckoutPage} from "../checkout/checkout";
-import {LoginPage} from  "../login/login";
 import { Storage } from '@ionic/storage';
+import {Keys} from "../../commons/constants/Keys";
+import {OrderItem} from "../../commons/constants/OrderItem";
+import {LoginPage} from "../login/login";
+import {CheckoutPage} from "../checkout/checkout";
 
 @Component({
   selector:'page-cart',
   templateUrl: 'cart.html',
-  providers: [UserCartService,CommonServices]
+  providers: [UserCartService, CommonServices]
 })
+
 export class CartPage {
+  public cartList: any = [];
+  public isChecked: boolean = false;
+  public totalAmount: any = 0.00;
+  private userId: string;
 
-  public cartList:Array<OrderItem>;
-  public productCount:any =0;
-  public totalAmount:any = 0.00;
+  constructor(public navCtrl: NavController, private navParams: NavParams, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http, private storage: Storage, private commonService: CommonServices, private userCartService: UserCartService) {}
 
-  constructor(public navCtrl:NavController,private alerCtrl:AlertController, public storage:Storage,private userCartService:UserCartService,private http:Http,private commonService:CommonServices) {
-
-  }
-
-  ionViewWillEnter () {
-    document.querySelector('#tabs .tabbar')['style'].display = 'flex';
-  }
-
-  ionViewDidEnter(){
-  this.loadData();
-  }
-  loadData(){
-    this.storage.get(Keys.USER_CART_KEY).then(res =>{
-      console.log(res);
-      if(res == null || res == "undefined"){
-        console.log("return null");
-
-      }else{
-        console.log("return item");
-        this.cartList = res;
-        this.productCount = this.cartList.length;
-        let amount = 0;
-        for(var i=0;i<this.cartList.length;i++){
-          let deItem = this.cartList[i];
-          amount += deItem.distPrice * deItem.qty;
-        }
-        this.totalAmount = amount;
+  /**
+   * 页面载入加载购物车商品
+   */
+  ionViewDidEnter () {
+    this.storage.get(Keys.USER_INFO_KEY).then((userInfo) => {
+      if (userInfo) {
+        this.userId = userInfo.id;
+        this.storage.get(Keys.USER_CART_KEY + this.userId).then((cartInfo) => {
+          if (cartInfo) {
+            this.cartList = cartInfo;
+          }
+        });
       }
     });
   }
 
-  removeItemFromCart(item){
-    let newItems = new Array<OrderItem>();
-    for(var i=0;i<this.cartList.length;i++){
-      let deItem = this.cartList[i];
-      if(deItem.productId == item.productId){
+  ionViewDidLeave () {
+    this.cartList = [];
+    this.isChecked = false;
+    this.totalAmount = 0.00;
+  }
 
-      }else{
-        newItems.push(deItem);
+  /**
+   * 全选
+   */
+  notificationAll () {
+    this.totalAmount = 0.00;
+    for (let i = 0; i < this.cartList.length; i++) {
+      this.cartList[i].isChecked = this.isChecked;
+      if (this.isChecked) {
+        this.totalAmount += this.cartList[i].amount;
       }
     }
-    this.cartList = newItems;
+  }
 
+  /**
+   * 单选
+   * @param item
+   */
+  notificationItem (item: any) {
+    if (item.isChecked) {
+      this.totalAmount -= item.amount;
+    } else {
+      this.totalAmount += item.amount;
+    }
+  }
+
+  /**
+   * 数量加/减
+   * @param item
+   * @param type
+   */
+  quantityChange (item: any, type: number) {
+    if (type == 0) { //数量减
+      if (item.qty > 1) {
+        item.isChecked = true;
+        item.qty -= 1;
+        item.amount -= item.distPrice;
+      }
+    }
+    if (type == 1) { //数量加
+      item.isChecked = true;
+      item.qty += 1;
+      item.amount += item.distPrice;
+    }
     this.calcChange();
   }
 
-  quantityPlus(item){
-    this.quantityChange(item,1);
-  }
-
-  quantityChange(item, qty){
-    let amount = 0.00;
-    for(var i=0;i<this.cartList.length;i++){
-      let deItem = this.cartList[i];
-      if(deItem.productId == item.productId){
-        deItem.qty = deItem.qty + qty;
-        amount += deItem.distPrice * deItem.qty;
+  /**
+   * 删除购物车指定商品
+   * @param index
+   */
+  delItem (index: number) {
+    this.commonService.showConfirm('确认要删除这个宝贝吗？', this.alertCtrl, (callback) => {
+      if (callback) {
+        let orderItems: any = [];
+        this.cartList.splice(index, 1);
+        for (let i = 0; i < this.cartList.length; i++) {
+          let orderItem = new OrderItem(this.cartList[i]);
+          orderItems.push(orderItem);
+        }
+        this.userCartService.updateOrderItem(orderItems, this.userId);
       }
+    });
+  }
+
+  //重新计算总金额
+  private calcChange () {
+    let orderItems: any = [];
+    this.totalAmount = 0.00;
+    for (let i = 0; i < this.cartList.length; i++) {
+      if (this.cartList[i].isChecked) {
+        this.totalAmount += this.cartList[i].amount;
+      }
+      let orderItem = new OrderItem(this.cartList[i]);
+      orderItems.push(orderItem);
     }
-    this.totalAmount = amount;
-
-    this.userCartService.saveItems(this.cartList);
+    this.userCartService.updateOrderItem(orderItems, this.userId);
   }
 
-  calcChange(){
-    let amount = 0;
-
-    for(var i=0;i<this.cartList.length;i++){
-      let deItem = this.cartList[i];
-
-      amount += deItem.distPrice * deItem.qty;
-
-    }
-    this.totalAmount = amount;
-
-    this.userCartService.saveItems(this.cartList);
-  }
-
-  quantityMinus(item){
-    if(item.qty > 1){
-      this.quantityChange(item,-1);
-    } 
-  }
-
-  checkout(){
-    let userId;
+  /**
+   * 去结算
+   */
+  doOrder () {
     this.storage.get(Keys.USER_INFO_KEY).then((userInfo) => {
       if (userInfo) {
-         userId =userInfo.id;
+        let items: any = [];
+        for (let i = 0; i < this.cartList.length; i++) { //获取选中的商品
+          if (this.cartList[i].isChecked) {
+            items.push(this.cartList[i]);
+          }
+        }
+        if (items.length == 0) {
+          this.commonService.showToast('您还没有选择商品哦!', 'center');
+          return;
+        }
 
-        let body = {userId:userId, orderType:1,items:this.cartList};
-        this.http.post(Keys.SERVICE_URL + '/orders/genOrder', JSON.stringify(body),{headers:Keys.HEADERS})
-          .subscribe(res => {
-            let retData = res.json();
-            console.log(retData);
-            if(retData.success === 'true'){
-              this.navCtrl.push(CheckoutPage, {'orderId':retData.orderId});
-            }else{
-              this.commonService.showAlert(retData.message, this.alerCtrl);
-            }
-          });
+        let loading = this.commonService.showLoading(this.loadingCtrl);
+        let body = {userId: this.userId, orderType: 1,items: items};
 
-
-
+        this.http.post(Keys.SERVICE_URL + '/orders/genOrder', JSON.stringify(body), {headers: Keys.HEADERS}).subscribe((res) => {
+          let result = res.json();
+          loading.dismiss();
+          if (result.success == 'true') {
+            this.navCtrl.push(CheckoutPage, {orderId: result.orderId, userId: this.userId});
+          } else {
+            this.commonService.showToast(result.message, 'center');
+          }
+        });
       } else {
         this.navCtrl.push(LoginPage);
       }
     });
-
-
   }
 }

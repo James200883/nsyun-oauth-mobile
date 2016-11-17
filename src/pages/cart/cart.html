@@ -1,46 +1,69 @@
 <ion-header>
-  <ion-navbar hideBackButton no-border-bottom>
+  <ion-navbar hideBackButton>
     <ion-title>购物车</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <button ion-button full color="danger" *ngIf="productCount" (click)="checkout()">
-    <ion-icon name="ios-cart"></ion-icon>
-    购买
-  </button>
+<ion-content class="cart-content">
+  <ion-list class="ion-list" *ngIf="cartList && cartList.length > 0">
+    <ion-list-header class="cart-title">
+      <ion-checkbox color="danger" [(ngModel)]="isChecked" (ionChange)="notificationAll()"></ion-checkbox>
+      <ion-label class="shop-name">YL 育龙自营</ion-label>
+    </ion-list-header>
 
-  <ion-list>
-    <ion-item *ngFor="let item of cartList">
-      <ion-thumbnail item-left>
-        <img [src]="item.imageUrl">
-      </ion-thumbnail>
-      <h2>{{item.productName}}</h2>
-      <p>价格 : ${{item.distPrice}} x {{item.qty}} = ${{item.distPrice * item.qty}}</p>
+    <ion-item-sliding class="cart-sliding" *ngFor="let item of cartList; let ind = index">
+      <ion-item class="cart-item">
+        <ion-checkbox color="danger" [(ngModel)]="item.isChecked" (click)="notificationItem(item)"></ion-checkbox>
+        <ion-thumbnail item-left>
+          <img [src]="item.imageUrl"/>
+        </ion-thumbnail>
+        <ion-label>
+          <div class="ellipsis-text product-name">{{item.name}}</div>
+          <div class="product-price">
+            <ion-row>
+              <ion-col width-50>
+                <span class="price">￥{{item.distPrice * item.qty}}</span>
+              </ion-col>
+              <ion-col width-50>
+                <button ion-button icon-only color="white" class="btn-count" (click)="quantityChange(item, 0)">
+                  <ion-icon name="remove"></ion-icon>
+                </button>
+                <input type="tel" class="count-input" value="{{item.qty}}"/>
+                <button ion-button icon-only color="white" class="btn-count" (click)="quantityChange(item, 1)">
+                  <ion-icon name="add"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-label>
+      </ion-item>
 
-      <button ion-button icon-only item-right clear (click)="quantityPlus(item)" ><ion-icon name="arrow-dropup"></ion-icon></button>
-      <button ion-button  item-right >{{item.qty}}</button>
-      <button ion-button icon-only item-right clear (click)="quantityMinus(item)" ><ion-icon name="arrow-dropdown"></ion-icon></button>
-      <button ion-button icon-only item-right clear (click)="removeItemFromCart(item)" ><ion-icon name="remove-circle"></ion-icon></button>
-    </ion-item>
-
-    <ion-item *ngIf="productCount > 0" >
-      <h2>合计:</h2>
-      <h2 item-right >${{totalAmount}}</h2>
-    </ion-item>
-
-    <ion-item *ngIf="!productCount" >
-      <h2 class="center">亲，购物车是空的</h2>
-    </ion-item>
-
-
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="delItem(ind)">删除</button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
-  <ion-grid>
-    <ion-row>
-      <ion-col width-50 offset-50>
-        <button ion-button item-right color="danger" *ngIf="productCount > 0" (click)="checkout()">立即购买</button>
-      </ion-col>
 
-    </ion-row>
-  </ion-grid>
+  <ion-row class="empty-cart" *ngIf="cartList && cartList.length == 0">
+    <ion-col>
+      <div class="tips">
+        <p text-center>购物车是空的</p>
+        <p text-center>去挑几件中意的商品吧</p>
+      </div>
+    </ion-col>
+  </ion-row>
 </ion-content>
+
+<ion-footer class="cart-footer">
+  <ion-toolbar no-border-bottom>
+    <ion-row *ngIf="cartList && cartList.length > 0">
+      <ion-col width-33 class="select-all">
+        <ion-checkbox color="danger" [(ngModel)]="isChecked" (ionChange)="notificationAll()"></ion-checkbox><span>全选</span>
+      </ion-col>
+      <ion-col width-33 class="total">合计: <span>￥{{totalAmount}}</span></ion-col>
+      <ion-col width-33>
+        <button ion-button block color="danger" (click)="doOrder()">结算</button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

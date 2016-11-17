@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicApp, IonicModule } from 'ionic-angular';
+import {IonicApp, IonicModule} from 'ionic-angular';
 import { MyApp } from './app.component';
 import { SalesPage } from '../pages/sales/sales';
 import { CartPage } from '../pages/cart/cart';
@@ -30,6 +30,7 @@ import {AreasPage} from "../pages/personal/MyAddress/areas";
 import {UserIdentificationPage} from "../pages/personal/identification/UserIdentification";
 import {UserIdentShopPage} from "../pages/personal/identification/UserIdentShop";
 import {NickNamePage} from "../pages/personal/settings/nickName";
+import {SelectAddressPage} from "../pages/checkout/selectAddress";
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import {NickNamePage} from "../pages/personal/settings/nickName";
     AreasPage,
     UserIdentificationPage,
     UserIdentShopPage,
-    NickNamePage
+    NickNamePage,
+    SelectAddressPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -96,7 +98,8 @@ import {NickNamePage} from "../pages/personal/settings/nickName";
     AreasPage,
     UserIdentificationPage,
     UserIdentShopPage,
-    NickNamePage
+    NickNamePage,
+    SelectAddressPage
   ],
   providers: [Storage]
 })

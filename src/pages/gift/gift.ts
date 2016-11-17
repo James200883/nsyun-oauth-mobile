@@ -42,7 +42,6 @@ export class GiftPage {
         this.orders = res.json();
         this.orderItems = this.orders.items;
         this.productCount = this.orderItems.length;
-        console.log(this.orders);
       });
   }
 

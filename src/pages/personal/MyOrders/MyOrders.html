@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar hideBackButton no-border-bottom>
     <ion-buttons start>
-      <button ion-button color="dark" (click)="navCtrl.pop()"><ion-icon name="arrow-back" class="btn-back"></ion-icon></button>
+      <button ion-button navPop color="dark"><ion-icon name="arrow-back" class="btn-back"></ion-icon></button>
     </ion-buttons>
     <ion-title text-center>我的订单</ion-title>
   </ion-navbar>
@@ -14,9 +14,9 @@
       <ion-segment-button value="1">
         已支付订单
       </ion-segment-button>
-      <ion-segment-button value="2">
+      <!--<ion-segment-button value="2">
         充值订单
-      </ion-segment-button>
+      </ion-segment-button>-->
     </ion-segment>
   </ion-toolbar>
 </ion-header>
@@ -34,8 +34,8 @@
           </ion-card-header>
           <ion-card-content class="card-content">
             <div>
-              <ion-avatar class="avatar"><img src="{{order.items[0].productUrl}}"/></ion-avatar>
-              <span>{{order.items[0].productName}}</span>
+              <ion-avatar class="avatar"><img src="{{order.items[0].imageUrl}}"/></ion-avatar>
+              <span>{{order.items[0].name}}</span>
             </div>
           </ion-card-content>
           <div class="total-tips">共{{order.items.length}}件商品 实付款:￥{{order.amount}}</div>
@@ -55,8 +55,8 @@
           </ion-card-header>
           <ion-card-content class="card-content">
             <div>
-              <ion-avatar class="avatar"><img src="{{order.items[0].productUrl}}"/></ion-avatar>
-              <span>{{order.items[0].productName}}</span>
+              <ion-avatar class="avatar"><img src="{{order.items[0].imageUrl}}"/></ion-avatar>
+              <span>{{order.items[0].name}}</span>
             </div>
           </ion-card-content>
           <div class="total-tips">共{{order.items.length}}件商品 实付款:￥{{order.amount}}</div>
@@ -65,7 +65,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-list *ngSwitchCase="'2'" class="ion-list">
+    <!--<ion-list *ngSwitchCase="'2'" class="ion-list">
       <ion-item *ngFor="let order of orders; let ind = index">
         <ion-card>
           <ion-card-header class="card-header">
@@ -76,15 +76,15 @@
           </ion-card-header>
           <ion-card-content class="card-content">
             <div>
-              <ion-avatar class="avatar"><img src="{{order.items[0].productUrl}}"/></ion-avatar>
-              <span>{{order.items[0].productName}}</span>
+              <ion-avatar class="avatar"><img src="{{order.items[0].imageUrl}}"/></ion-avatar>
+              <span>{{order.items[0].name}}</span>
             </div>
           </ion-card-content>
           <div class="total-tips">共{{order.items.length}}件商品 实付款:￥{{order.amount}}</div>
         </ion-card>
         <button ion-button outline small color="dark" class="opt-btn" (click)="delOrder(order.orderId, ind)">删除订单</button>
       </ion-item>
-    </ion-list>
+    </ion-list>-->
 
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasMore">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...."></ion-infinite-scroll-content>
