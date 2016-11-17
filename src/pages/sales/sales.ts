@@ -11,55 +11,42 @@ import {ProductPage} from "../product/product";
   providers: [CommonServices]
 })
 export class SalesPage {
-  zhClass: string;
-  xlClass: string = 'cur';
-  jgClass: string = 'sortPrice';
-  upOrDown: string = '';
-  curCategoryNo:string='20';
+  sortName:string = 'distPrice';
+  sortType:string = '0';
+  curCategoryNo:string='';
   items:any;
+  listCategory:any;
 
   constructor(private navCtrl: NavController, private http: Http, private commonService: CommonServices, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
     this.loadData();
+    this.loadCategory();
   }
 
   loadData(){
     let params = new URLSearchParams();
     params.set('categoryNo',this.curCategoryNo);
-    this.http.get(Keys.SERVICE_URL +'/product/findProductByCategory', {search:params}).subscribe(res => {
+    params.set('sortName',this.sortName);
+    params.set('sortType',this.sortType);
+
+    this.http.get(Keys.SERVICE_URL +'/product/findProductByCategory', {search:params}) .subscribe(res => {
       this.items = res.json();
     });
   }
 
-  switchSortType (flag) { //排序方式样式切换
-    switch (flag){
-      case 1:
-        this.zhClass = 'cur';
-        this.xlClass = '';
-        this.jgClass = 'sortPrice';
-        this.upOrDown = '';
-        this.curCategoryNo = "10";
-        break;
-      case 2:
-        this.xlClass = 'cur';
-        this.zhClass = '';
-        this.jgClass = 'sortPrice';
-        this.upOrDown = '';
-        this.curCategoryNo = "20";
-        break;
-      case 3:
-        this.jgClass = 'sortPrice cur';
-        this.zhClass = '';
-        this.xlClass = '';
-        if (this.upOrDown == 'up') {
-          this.upOrDown = 'down';
-        } else if (this.upOrDown == 'down') {
-          this.upOrDown = 'up';
-        } else {
-          this.upOrDown = 'up';
-        }
-        this.curCategoryNo = "30";
-        break;
-    }
+  loadCategory () {
+    this.http.get(Keys.SERVICE_URL +'/category/findAllCategory').subscribe(res => {
+      this.listCategory = res.json();
+    });
+  }
+
+  categorySelected(categoryNo){
+    this.curCategoryNo = categoryNo;
+    this.loadData();
+  }
+
+  switchSortType (sortName, sortType) { //排序方式样式切换
+    this.sortName = sortName;
+    this.sortType = sortType;
     this.loadData();
   }
 

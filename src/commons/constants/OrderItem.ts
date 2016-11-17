@@ -2,7 +2,7 @@ export class OrderItem {
   private productId: string;
   private name: string;
   private imageUrl: string;
-  private spec: string;
+  private sku: string;
   private qty: number;
   private price: number;
   private distPrice: number;
@@ -13,7 +13,7 @@ export class OrderItem {
     this.productId = data.productId || '';
     this.name = data.name || '';
     this.imageUrl = data.imageUrl || '';
-    this.spec = data.spec || '';
+    this.sku = data.sku || '';
     this.qty = data.qty || 0;
     this.price = data.price || 0.00;
     this.distPrice = data.distPrice || 0.00;
@@ -33,8 +33,8 @@ export class OrderItem {
     return this.imageUrl;
   }
 
-  public getSpec () : string {
-    return this.spec;
+  public getSku () : string {
+    return this.sku;
   }
 
   public getQty (): number {

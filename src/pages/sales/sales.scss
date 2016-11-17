@@ -15,12 +15,14 @@ page-sales .ion-list .item {padding: 0;}
 page-sales .ion-list .item .item-inner {padding: 0}
 page-sales .ion-list .item ion-label {margin: 0;}
 page-sales .ion-list .item .item-detail .col-detail {padding: 3px 1px 3px 1px;}
-page-sales .ion-list .item .item-detail .col-detail img {width: 100%; max-width: 100%; height: 260px; max-height: 260px;}
+page-sales .ion-list .item .item-detail .col-detail img {width: 100%; max-width: 100%; height: 160px; max-height: 160px;}
 page-sales .ion-list .item .item-detail .col-detail .sell-info {margin: 0.5rem 0 1rem 0;}
 page-sales .ion-list .item .item-detail .col-detail .sell-info p {font-size: 1.4rem;}
 page-sales .ion-list .item .item-detail .col-detail .sell-info div.price {width: 100%;}
 page-sales .ion-list .item .item-detail .col-detail .sell-info div.price .dis-price {color: #ff0000; font-weight: bold;}
-page-sales .ion-list .item .item-detail .col-detail .sell-info div.price .origin-price {font-weight: normal; font-size: 1.4rem; color: #666; padding-left: 16px; text-decoration: line-through;}
+page-sales .ion-list .item .item-detail .col-detail .sell-info div.price .origin-price {font-weight: normal; font-size: 1.4rem; color: #666; padding-left: 5px; text-decoration: line-through;}
 page-sales .ion-list .item .item-detail .col-detail .sell-info p {padding-top: 5px; width: 300px;}
-page-sales .ion-list .item .item-detail .col-detail .sell-info p span.product-special {font-weight: normal; font-size: 1.6rem; color: #ff0000; padding-left: 16px;}
+page-sales .ion-list .item .item-detail .col-detail .sell-info p span.product-special {font-weight: normal; font-size: 1.6rem; color: #ff0000; padding-left: 5px;}
+
+page-sales .background-category {color: #66aa39}
 

@@ -28,17 +28,18 @@
     </ion-row>
 
     <ion-row>
-      <ion-col width-50 text-center>
-        <button ion-fab fab><ion-icon name="bonfire"></ion-icon></button>
-      </ion-col>
-      <ion-col width-50 text-center>
-        <button ion-fab fab ><ion-icon name="book"></ion-icon></button>
-      </ion-col>
+      <button ion-button  icon-left (click)="addBlogCount(blog.id, 'like')">
+        <ion-icon name='people'></ion-icon>
+        {{blog.blog.countLike}}
+      </button>
+
+      <button ion-button  icon-left (click)="addBlogCount(blog.id, 'wish')">
+        <ion-icon name='paw'></ion-icon>
+        {{blog.blog.countWish}}
+      </button>
+
     </ion-row>
-    <ion-row style="margin-top: 5.5rem">
-      <ion-col width-50 text-center>{{blog.blog.countLike}}</ion-col>
-      <ion-col width-50 text-center>{{blog.blog.countWish}}</ion-col>
-    </ion-row>
+
   </ion-grid>
 
 </ion-content>

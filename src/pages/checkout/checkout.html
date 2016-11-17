@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar hideBackButton>
     <ion-buttons start>
-      <button ion-button color="dark" (click)="navCtrl.pop()"><ion-icon name="arrow-back" class="btn-back"></ion-icon></button>
+      <button ion-button color="dark" navPop><ion-icon name="arrow-back" class="btn-back"></ion-icon></button>
     </ion-buttons>
     <ion-title>填写订单</ion-title>
   </ion-navbar>
@@ -24,7 +24,7 @@
 
   <!--商品详情 -->
   <ion-card class="prod-card">
-    <ion-card-content *ngFor="let item of orderItems">
+    <ion-card-content *ngFor="let item of orderItems" class="prod-card-content">
       <ion-row>
         <ion-col width-25 class="col-image">
           <ion-thumbnail item-left>
@@ -35,7 +35,7 @@
           <div class="prod-base-info">
             <span class="prod-name ellipsis-text">{{item.name}}</span>
             <p class="prod-count">数量: x{{item.qty}}</p>
-            <p>颜色: 白色</p>
+            <p *ngIf="item.sku">[规格] {{item.sku}}</p>
             <span class="prod-price">￥{{item.distPrice}}</span>
           </div>
         </ion-col>

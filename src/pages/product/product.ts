@@ -21,6 +21,9 @@ import {CartPage} from "../cart/cart";
 export class ProductPage {
   private productId: string;
   public productInfo: any;
+  public imageItems: any;
+  public options: any = {initialSlide: 0, loop: true, autoplay: 3000};
+  public sku: string = null;
 
   constructor (public navCtrl: NavController, private navParams: NavParams, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http, private storage: Storage, private commonService: CommonServices, private userCartService: UserCartService) {
     this.productId = navParams.get('id');
@@ -41,8 +44,16 @@ export class ProductPage {
     params.set('id', this.productId);
 
     this.http.get(Keys.SERVICE_URL + '/product/getProductInfoById', {search: params}).subscribe((res) => {
-      this.productInfo = res.json();
+      let result = res.json();
+      if (result) {
+        this.productInfo = result.productInfo;
+        this.imageItems = result.imageItems;
+      }
     });
+  }
+
+  switchSku(skuName){
+    this.sku = skuName;
   }
 
   /**
@@ -80,32 +91,36 @@ export class ProductPage {
    * 立即购买
    */
   doBuy () {
+    if (this.productInfo.product.skuItems && !this.sku) {
+      this.commonService.showToast('请选择颜色规格', 'center');
+      return;
+    }
     let buyConfirm = this.alertCtrl.create({
       title: '',
       message: '确认购买？',
       buttons: [
         {text: '加入购物车',
-         handler: () => {
-           this.storage.get(Keys.USER_INFO_KEY).then((userInfo) => {
-             if (userInfo) {
-               let data = {
-                 productId: this.productId,
-                 name: this.productInfo.product.name,
-                 imageUrl: this.productInfo.product.imageUrl,
-                 spec: this.productInfo.product.spec,
-                 qty: 1,
-                 price: parseFloat(parseFloat(this.productInfo.product.price).toFixed(2)),
-                 distPrice: parseFloat(parseFloat(this.productInfo.product.distPrice).toFixed(2)),
-                 isChecked: false
-               };
+          handler: () => {
+            this.storage.get(Keys.USER_INFO_KEY).then((userInfo) => {
+              if (userInfo) {
+                let data = {
+                  productId: this.productId,
+                  name: this.productInfo.product.name,
+                  imageUrl: this.productInfo.product.imageUrl,
+                  sku: this.sku,
+                  qty: 1,
+                  price: parseFloat(parseFloat(this.productInfo.product.price).toFixed(2)),
+                  distPrice: parseFloat(parseFloat(this.productInfo.product.distPrice).toFixed(2)),
+                  isChecked: false
+                };
 
-               let orderItem = new OrderItem(data);
-               this.userCartService.addOrderItem(orderItem, userInfo.id);
-             } else {
-               this.navCtrl.push(LoginPage);
-             }
-           });
-         }},
+                let orderItem = new OrderItem(data);
+                this.userCartService.addOrderItem(orderItem, userInfo.id);
+              } else {
+                this.navCtrl.push(LoginPage);
+              }
+            });
+          }},
         {
           text: '立即购买',
           handler: () => {
@@ -115,7 +130,7 @@ export class ProductPage {
                   productId: this.productId,
                   name: this.productInfo.product.name,
                   imageUrl: this.productInfo.product.imageUrl,
-                  spec: this.productInfo.product.spec,
+                  sku: this.sku,
                   qty: 1,
                   price: parseFloat(parseFloat(this.productInfo.product.price).toFixed(2)),
                   distPrice: parseFloat(parseFloat(this.productInfo.product.distPrice).toFixed(2)),

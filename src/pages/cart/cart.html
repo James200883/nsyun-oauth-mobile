@@ -19,6 +19,7 @@
         </ion-thumbnail>
         <ion-label>
           <div class="ellipsis-text product-name">{{item.name}}</div>
+          <p class="ellipsis-text product-special" *ngIf="item.sku">[规格] {{item.sku}}</p>
           <div class="product-price">
             <ion-row>
               <ion-col width-50>

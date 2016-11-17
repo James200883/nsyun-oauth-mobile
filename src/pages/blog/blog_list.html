@@ -19,7 +19,7 @@
 
   <ion-row class="row">
     <ion-col width-25>
-      <button ion-button color="secondary" (click)="changeCate(-1)" >滚动</button>
+      <button ion-button color="secondary" (click)="changeCate(-1)" >全部</button>
     </ion-col>
     <ion-col width-25>
       <button  ion-button color="danger" (click)="changeCate(1)">资讯新闻</button>
@@ -37,11 +37,11 @@
 
     <ion-item *ngFor="let blog of blogs; let ind = index">
       <ion-thumbnail item-left>
-        <img [src]="blog.imageUrl">
+        <img (click)="goBlogDetail(blog.id)" [src]="blog.imageUrl">
       </ion-thumbnail>
-      <h2>{{blog.title}}</h2>
+      <h2><button ion-button clear (click)="goBlogDetail(blog.id)" >{{blog.title}}</button></h2>
       <p>{{blog.blogCategory.name}} {{blog.author}} {{blog.publishDateString}} </p>
-      <button clear item-right (click)="goBlogDetail(blog.id)"><ion-icon name="flame"></ion-icon></button>
+      <button clear item-right (click)="goBlogDetail(blog.id)" color="blue"><ion-icon name="arrow-forward"></ion-icon></button>
     </ion-item>
 
   </ion-list>
