@@ -6,7 +6,10 @@ import {Component} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 import {Storage} from '@ionic/storage'
 import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
-import {NavController, LoadingController, ModalController, AlertController, NavParams} from "ionic-angular";
+import {
+  NavController, LoadingController, ModalController, AlertController, NavParams,
+  ToastController
+} from "ionic-angular";
 import {CommonServices} from "../../../commons/services/CommonServices";
 import {ProvincesPage} from "../MyAddress/provinces";
 import {CitiesPage} from "../MyAddress/cities";
@@ -36,7 +39,7 @@ export class UserIdentificationPage {
   cities = [];
   areas = [];
 
-  constructor (public navCtrl: NavController,private alerCtrl:AlertController, private storage:Storage,private loadingCtrl: LoadingController, private modalCtrl: ModalController, private http: Http, private formBuilder: FormBuilder, private navParams: NavParams, private commonService: CommonServices) {
+  constructor (public navCtrl: NavController,private alerCtrl:AlertController, private toastCtrl: ToastController, private storage:Storage,private loadingCtrl: LoadingController, private modalCtrl: ModalController, private http: Http, private formBuilder: FormBuilder, private navParams: NavParams, private commonService: CommonServices) {
 
     this.addressForm = formBuilder.group({
       'realName': ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(15)])],
@@ -121,12 +124,12 @@ export class UserIdentificationPage {
   addEditAddress (addressInfo) {
     if (this.addressForm.valid) {
       if (this.provinceName == '省' || this.citiesName == '市' || this.areaName == '区') {
-        this.commonService.showToast('请选择区域', 'center');
+        this.commonService.showToastByHtml(this.toastCtrl, '请选择区域');
         return;
       }
 
       if(this.provinceName == '河北' && this.tradeInfo.length < 2){
-        this.commonService.showToast('河北省请认证网点', 'center');
+        this.commonService.showToastByHtml(this.toastCtrl, '河北省请认证网点');
         return;
       }
 

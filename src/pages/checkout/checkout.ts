@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavParams, NavController, LoadingController, ModalController} from 'ionic-angular';
+import {NavParams, NavController, LoadingController, ModalController, ToastController} from 'ionic-angular';
 import {Http,URLSearchParams} from '@angular/http';
 import {CommonServices} from "../../commons/services/CommonServices";
 import {Keys} from "../../commons/constants/Keys";
@@ -21,7 +21,7 @@ export class CheckoutPage {
   public orderInfos: any = {};
   public orderItems: any = [];
 
-  constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private navParams: NavParams, private http: Http, private commonService: CommonServices) {
+  constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private toastCtrl: ToastController, private navParams: NavParams, private http: Http, private commonService: CommonServices) {
     this.orderId = navParams.get('orderId');
     this.userId = navParams.get('userId');
   }
@@ -85,11 +85,11 @@ export class CheckoutPage {
    */
   submitOrder () {
     if (!this.addressInfo) {
-      this.commonService.showToast('请选择收货地址', 'center');
+      this.commonService.showToastByHtml(this.toastCtrl, '请选择收货地址');
       return;
     }
     if (!this.payType) {
-      this.commonService.showToast('请选择支付方式', 'center');
+      this.commonService.showToastByHtml(this.toastCtrl, '请选择支付方式');
       return;
     }
     if (this.payType == '1') { // 支付宝支付
@@ -103,19 +103,20 @@ export class CheckoutPage {
     params.set('subject', this.orderInfos.items[0].name);
     params.set('body', this.orderInfos.items[0].name);
     params.set('price', this.orderInfos.amount);
+    //params.set('price', '0.01');
     params.set('notifyUrl', Keys.SERVICE_URL + '/aliPay/payCallBack');
 
     this.http.post(Keys.SERVICE_URL + '/aliPay/getPayInfo', {headers: Keys.HEADERS}, {search: params}).subscribe((res) => {
       let payInfo = res.json().payInfo;
       AliPay.pay(payInfo).then((result) => {
-        let status = result.json().resultStatus;
-        if (status == '9000') {
-          this.commonService.showToast('支付成功', 'center');
+        let status = result.resultStatus;
+        if (status == 9000) {
+          this.commonService.showToastByHtml(this.toastCtrl, '支付成功');
           this.navCtrl.push(MyOrdersPage);
-        } else if (status == '8000') {
-          this.commonService.showToast('等待支付结果确认', 'center');
+        } else if (status == 8000) {
+          this.commonService.showToastByHtml(this.toastCtrl, '等待支付结果确认');
         } else {
-          this.commonService.showToast('支付失败', 'center');
+          this.commonService.showToastByHtml(this.toastCtrl, '支付失败');
         }
       });
     });

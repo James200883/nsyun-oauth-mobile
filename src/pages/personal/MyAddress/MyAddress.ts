@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 import {Storage} from '@ionic/storage'
 import {CommonServices} from "../../../commons/services/CommonServices";
-import {NavController, LoadingController, AlertController,NavParams} from "ionic-angular";
+import {NavController, LoadingController, AlertController, NavParams, ToastController} from "ionic-angular";
 import {Keys} from "../../../commons/constants/Keys";
 import {LoginPage} from "../../login/login";
 import {AddEditAddressPage} from "./AddEditAddress";
@@ -17,7 +17,7 @@ export class MyAddressPage {
   addresses = [];
   private userId: string;
 
-  constructor (public navCtrl: NavController, public params: NavParams, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private http: Http, private storage: Storage, private commonService: CommonServices) {
+  constructor (public navCtrl: NavController, public params: NavParams, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private commonService: CommonServices) {
     this.storage.get(Keys.USER_INFO_KEY).then((userInfo) => {
       if (userInfo) {
         this.userId = userInfo.id;
@@ -51,9 +51,9 @@ export class MyAddressPage {
 
         this.http.post(Keys.SERVICE_URL + '/userAddr/del', {headers: Keys.HEADERS}, {search: params}).subscribe((res) => {
           if (res.json().success == 'true') {
-            this.commonService.showToast('删除成功', 'center');
+            this.commonService.showToastByHtml(this.toastCtrl, '删除成功');
           } else {
-            this.commonService.showToast('删除失败', 'center');
+            this.commonService.showToastByHtml(this.toastCtrl, '删除失败');
           }
         });
       }

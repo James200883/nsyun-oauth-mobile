@@ -2,7 +2,7 @@
  * Created by hevan on 16/10/6.
  */
 import {Component} from '@angular/core';
-import {NavController, LoadingController, AlertController} from "ionic-angular";
+import {NavController, LoadingController, AlertController, ToastController} from "ionic-angular";
 import {BlogDetailPage} from './BlogDetail';
 import {Http,URLSearchParams} from "@angular/http";
 import {Keys} from "../../commons/constants/Keys";
@@ -27,7 +27,7 @@ export class BlogListPage {
   hasMore: boolean = true;
   blogs = [];
 
-  constructor(private navCtrl: NavController,private loadingCtrl: LoadingController, public commonService:CommonServices,private alertCtrl: AlertController, private http:Http){
+  constructor(private navCtrl: NavController,private loadingCtrl: LoadingController, private toastCtrl: ToastController, public commonService:CommonServices,private alertCtrl: AlertController, private http:Http){
     this.curCate = -1;
     this.searchBlog();
   }
@@ -89,7 +89,7 @@ export class BlogListPage {
       loading.dismiss();
     }, error => {
       loading.dismiss();
-      this.commonService.showToast('服务器或网络异常', 'center');
+      this.commonService.showToastByHtml(this.toastCtrl, '服务器或网络异常');
     });
   }
 
@@ -113,7 +113,7 @@ export class BlogListPage {
         infiniteScroll.complete();
       }, error => {
         infiniteScroll.complete();
-        this.commonService.showToast('加载更多数据失败', 'center');
+        this.commonService.showToastByHtml(this.toastCtrl, '加载更多数据失败');
       });
     }, 1000);
   }

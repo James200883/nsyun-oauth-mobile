@@ -1,8 +1,6 @@
-import {Injectable} from '@angular/core';
 import {Toast} from "ionic-native";
-import {AlertController, LoadingController, Loading} from "ionic-angular";
+import {AlertController, LoadingController, Loading, ToastController} from "ionic-angular";
 
-@Injectable()
 export class CommonServices {
   /**
    * cordova plugin toast
@@ -66,4 +64,12 @@ export class CommonServices {
     return loading;
   }
 
+  showToastByHtml (toastCtrl: ToastController, message: string) {
+    toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'middle',
+      dismissOnPageChange: true
+    }).present();
+  }
 }

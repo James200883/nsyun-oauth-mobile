@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
-import {NavController, LoadingController, ModalController, NavParams} from "ionic-angular";
+import {NavController, LoadingController, ModalController, NavParams, ToastController} from "ionic-angular";
 import {CommonServices} from "../../../commons/services/CommonServices";
 import {ProvincesPage} from "./provinces";
 import {CitiesPage} from "./cities";
@@ -32,7 +32,7 @@ export class AddEditAddressPage {
   cities = [];
   areas = [];
 
-  constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private http: Http, private formBuilder: FormBuilder, private navParams: NavParams, private commonService: CommonServices) {
+  constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private toastCtrl: ToastController, private http: Http, private formBuilder: FormBuilder, private navParams: NavParams, private commonService: CommonServices) {
     this.addressId = navParams.get('addressId');
     this.userId = navParams.get('userId');
     if (this.addressId) {
@@ -63,7 +63,7 @@ export class AddEditAddressPage {
   addEditAddress (addressInfo) {
     if (this.addressForm.valid) {
       if (this.provinceName == '省' || this.citiesName == '市' || this.areaName == '区') {
-        this.commonService.showToast('请选择区域', 'center');
+        this.commonService.showToastByHtml(this.toastCtrl, '请选择区域');
         return;
       }
 
@@ -82,7 +82,7 @@ export class AddEditAddressPage {
       this.http.post(Keys.SERVICE_URL + '/userAddr/save', {headers: Keys.HEADERS}, {search: params}).subscribe((res) => {
         if (res.json().success == 'true') {
           loading.dismiss();
-          this.commonService.showToast('保存成功', 'center');
+          this.commonService.showToastByHtml(this.toastCtrl, '保存成功');
           this.navCtrl.push(MyAddressPage);
         }
       });

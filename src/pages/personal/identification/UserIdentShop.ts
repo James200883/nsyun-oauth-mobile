@@ -5,7 +5,7 @@ import {Component} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 import {Storage} from '@ionic/storage';
 import {CommonServices} from "../../../commons/services/CommonServices";
-import {NavController,NavParams, LoadingController} from "ionic-angular";
+import {NavController, NavParams, LoadingController, ToastController} from "ionic-angular";
 import {Keys} from "../../../commons/constants/Keys";
 import {LoginPage} from "../../login/login";
 
@@ -25,7 +25,7 @@ export class UserIdentShopPage {
   private areaName:string;
 
 
-  constructor (public navCtrl: NavController,public params: NavParams, private loadingCtrl: LoadingController, public http: Http, private storage: Storage, private commonService: CommonServices) {
+  constructor (public navCtrl: NavController,public params: NavParams, private loadingCtrl: LoadingController, private toastCtrl: ToastController, public http: Http, private storage: Storage, private commonService: CommonServices) {
 
     this.cityName = params.get('cityName');
     this.areaName = params.get('areaName');
@@ -95,7 +95,7 @@ export class UserIdentShopPage {
        if(ret.success == 'true'){
          this.navCtrl.pop();
        }else {
-         this.commonService.showToast(ret.message, 'center');
+         this.commonService.showToastByHtml(this.toastCtrl, ret.message);
        }
 
     });
@@ -113,7 +113,7 @@ export class UserIdentShopPage {
       if(ret.success == 'true'){
         this.navCtrl.pop();
       }else {
-        this.commonService.showToast(ret.message,'center');
+        this.commonService.showToastByHtml(this.toastCtrl, ret.message);
       }
 
     });

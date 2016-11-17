@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Http} from '@angular/http';
-import {NavController, AlertController, LoadingController, NavParams} from 'ionic-angular';
+import {NavController, AlertController, LoadingController, NavParams, ToastController} from 'ionic-angular';
 import {CommonServices} from "../../commons/services/CommonServices";
 import {UserCartService} from "../../commons/services/UserCartService";
 import { Storage } from '@ionic/storage';
@@ -21,12 +21,13 @@ export class CartPage {
   public totalAmount: any = 0.00;
   private userId: string;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http, private storage: Storage, private commonService: CommonServices, private userCartService: UserCartService) {}
+  constructor(public navCtrl: NavController, private navParams: NavParams, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private commonService: CommonServices, private userCartService: UserCartService) {}
 
   /**
    * 页面载入加载购物车商品
    */
   ionViewDidEnter () {
+    document.querySelector('#tabs .tabbar')['style'].display = 'flex';
     this.storage.get(Keys.USER_INFO_KEY).then((userInfo) => {
       if (userInfo) {
         this.userId = userInfo.id;
@@ -136,7 +137,7 @@ export class CartPage {
           }
         }
         if (items.length == 0) {
-          this.commonService.showToast('您还没有选择商品哦!', 'center');
+          this.commonService.showToastByHtml(this.toastCtrl, '您还没有选择商品哦');
           return;
         }
 
@@ -149,7 +150,7 @@ export class CartPage {
           if (result.success == 'true') {
             this.navCtrl.push(CheckoutPage, {orderId: result.orderId, userId: this.userId});
           } else {
-            this.commonService.showToast(result.message, 'center');
+            this.commonService.showToastByHtml(this.toastCtrl, result.message);
           }
         });
       } else {

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, AlertController, LoadingController} from 'ionic-angular';
+import {NavController, AlertController, LoadingController, ToastController} from 'ionic-angular';
 import {Http,URLSearchParams} from '@angular/http';
 import { Storage } from '@ionic/storage';
 import {NavParams} from "ionic-angular/index";
@@ -25,7 +25,7 @@ export class ProductPage {
   public options: any = {initialSlide: 0, loop: true, autoplay: 3000};
   public sku: string = null;
 
-  constructor (public navCtrl: NavController, private navParams: NavParams, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private http: Http, private storage: Storage, private commonService: CommonServices, private userCartService: UserCartService) {
+  constructor (public navCtrl: NavController, private navParams: NavParams, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private commonService: CommonServices, private userCartService: UserCartService) {
     this.productId = navParams.get('id');
   }
 
@@ -34,6 +34,10 @@ export class ProductPage {
    */
   ionViewWillEnter () {
     document.querySelector('#tabs .tabbar')['style'].display = 'none';
+  }
+
+  ionViewWillLeave () {
+    document.querySelector('#tabs .tabbar')['style'].display = 'flex';
   }
 
   /**
@@ -76,7 +80,7 @@ export class ProductPage {
                 loading.dismiss();
                 this.navCtrl.push(GiftPage, {'orderId': result.orderId});
               } else {
-                this.commonService.showToast(result.message, 'center');
+                this.commonService.showToastByHtml(this.toastCtrl, result.message);
               }
             });
           } else {
@@ -92,7 +96,7 @@ export class ProductPage {
    */
   doBuy () {
     if (this.productInfo.product.skuItems && !this.sku) {
-      this.commonService.showToast('请选择颜色规格', 'center');
+      this.commonService.showToastByHtml(this.toastCtrl, '请选择颜色');
       return;
     }
     let buyConfirm = this.alertCtrl.create({
@@ -172,7 +176,7 @@ export class ProductPage {
                 loading.dismiss();
                 this.navCtrl.push(GiftPage, {'orderId': result.orderId});
               } else {
-                this.commonService.showToast(result.message, 'center');
+                this.commonService.showToastByHtml(this.toastCtrl, result.message);
                 if (result.code == '200') {
                   this.navCtrl.push(UserIdentificationPage);
                 }

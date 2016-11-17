@@ -3,7 +3,7 @@
  * Created by hevan on 16/10/6.
  */
 import {Component} from '@angular/core';
-import {NavController,LoadingController,NavParams} from 'ionic-angular';
+import {NavController, LoadingController, NavParams, ToastController} from 'ionic-angular';
 import {Http,URLSearchParams} from "@angular/http";
 import {Keys} from "../../commons/constants/Keys";
 import {CommonServices} from "../../commons/services/CommonServices";
@@ -18,7 +18,7 @@ export class BlogDetailPage {
   blogId:string;
   blog:any;
 
-  constructor(private navCtrl: NavController,private loadingCtrl: LoadingController,
+  constructor(private navCtrl: NavController,private loadingCtrl: LoadingController, private toastCtrl: ToastController,
               public params: NavParams,private commonService:CommonServices,private http:Http){
     this.blogId = params.get('blogId');
 
@@ -39,7 +39,7 @@ export class BlogDetailPage {
       loading.dismiss();
     }, error => {
       loading.dismiss();
-      this.commonService.showToast('服务器或网络异常', 'center');
+      this.commonService.showToastByHtml(this.toastCtrl, '服务器或网络异常');
     });
   }
 

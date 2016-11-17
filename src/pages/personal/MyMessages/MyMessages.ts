@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 import {Storage} from '@ionic/storage';
 import {CommonServices} from "../../../commons/services/CommonServices";
-import {NavController, LoadingController, AlertController} from "ionic-angular";
+import {NavController, LoadingController, AlertController, ToastController} from "ionic-angular";
 import {Keys} from "../../../commons/constants/Keys";
 import {LoginPage} from "../../login/login";
 import {MyMessagesContentPage} from "./MyMessagesContent";
@@ -16,7 +16,7 @@ import {MyMessagesContentPage} from "./MyMessagesContent";
 export class MyMessagesPage {
   messages = [];
 
-  constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private http: Http, private storage: Storage, private commonService: CommonServices) {}
+  constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private commonService: CommonServices) {}
 
   ionViewDidEnter () {
     this.storage.get(Keys.USER_INFO_KEY).then((userInfo) => {
@@ -51,9 +51,9 @@ export class MyMessagesPage {
 
         this.http.post(Keys.SERVICE_URL + '/userMsg/del', {headers: Keys.HEADERS}, {search: params}).subscribe((res) => {
           if (res.json().success == 'true') {
-            this.commonService.showToast('删除成功', 'center');
+            this.commonService.showToastByHtml(this.toastCtrl, '删除成功');
           } else {
-            this.commonService.showToast('删除失败', 'center');
+            this.commonService.showToastByHtml(this.toastCtrl, '删除失败');
           }
         });
       }

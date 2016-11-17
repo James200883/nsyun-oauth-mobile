@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import {CommonServices} from "../../commons/services/CommonServices";
-import {NavController, LoadingController, ModalController} from "ionic-angular";
+import {NavController, LoadingController, ModalController, ToastController} from "ionic-angular";
 import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
 import {Http, URLSearchParams} from "@angular/http";
 import {PersonalPage} from "../personal/personal";
@@ -20,7 +20,7 @@ export class LoginPage {
   mobile: AbstractControl;
   password: AbstractControl;
 
-  constructor (private navCtrl: NavController, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private http: Http, private storage: Storage, private commonService: CommonServices) {
+  constructor (private navCtrl: NavController, private toastCtrl: ToastController, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private http: Http, private storage: Storage, private commonService: CommonServices) {
     this.loginForm = this.formBuilder.group({
       mobile: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.required])]
@@ -45,17 +45,17 @@ export class LoginPage {
         loading.dismiss();
         let result = res.json();
         if (result.code == '001') {
-          this.commonService.showToast('请输入手机号码和登录密码', 'center');
+          this.commonService.showToastByHtml(this.toastCtrl, '请输入手机号码和登录密码');
         }
         if (result.code == '002') {
-          this.commonService.showToast('用户不存在', 'center');
+          this.commonService.showToastByHtml(this.toastCtrl, '用户不存在');
         }
         if (result.code == '003') {
           this.storage.set(Keys.USER_INFO_KEY, result.data);
           this.navCtrl.push(PersonalPage);
         }
         if (result.code == '004') {
-          this.commonService.showToast('手机号码或密码不正确', 'center');
+          this.commonService.showToastByHtml(this.toastCtrl, '手机号码或密码不正确');
         }
       });
     }

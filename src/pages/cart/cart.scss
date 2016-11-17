@@ -3,7 +3,7 @@ page-cart .ion-list {background-color: #ffffff; margin-top: 10px;}
 page-cart .ion-list .cart-sliding {margin-bottom: 5px;}
 page-cart .ion-list .cart-title {width: 100%; box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);}
 page-cart .ion-list .cart-title .shop-name {font-size: 1.4rem;}
-page-cart .ion-list .cart-item {background-color: #F5F5F5;}
+page-cart .ion-list .cart-item {background-color: #F5F5F5; height: 100px;}
 page-cart .ion-list .cart-item ion-label {overflow: visible;}
 page-cart .ion-list .cart-item .product-name {margin-top: -1rem; width: 80%;}
 page-cart .ion-list .cart-item .product-special {margin-top: 5px; width: 80%; margin-bottom: 0.5rem;}
@@ -17,5 +17,6 @@ page-cart .empty-cart .tips p {font-size: 1.5rem; color: #666;}
 page-cart .cart-footer {height: 60px;}
 page-cart .cart-footer .select-all {margin-top: 10px;}
 page-cart .cart-footer .select-all span {padding-left: 8px;}
+page-cart .cart-footer .btn-col {margin-top: -5px;}
 page-cart .cart-footer .total {font-weight: bold; margin-top: 15px;}
 page-cart .cart-footer .total span {color: #ff0000; font-size: 1.5rem;}
