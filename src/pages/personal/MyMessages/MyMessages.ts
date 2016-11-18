@@ -4,7 +4,6 @@ import {Storage} from '@ionic/storage';
 import {CommonServices} from "../../../commons/services/CommonServices";
 import {NavController, LoadingController, AlertController, ToastController} from "ionic-angular";
 import {Keys} from "../../../commons/constants/Keys";
-import {LoginPage} from "../../login/login";
 import {MyMessagesContentPage} from "./MyMessagesContent";
 
 @Component({
@@ -14,7 +13,7 @@ import {MyMessagesContentPage} from "./MyMessagesContent";
 })
 
 export class MyMessagesPage {
-  messages = [];
+  public messages: any = [];
 
   constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private commonService: CommonServices) {}
 
@@ -29,8 +28,6 @@ export class MyMessagesPage {
           this.messages = res.json();
           loading.dismiss();
         });
-      } else {
-        this.navCtrl.push(LoginPage);
       }
     });
   }

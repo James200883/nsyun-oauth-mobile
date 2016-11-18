@@ -7,7 +7,6 @@ import {Storage} from '@ionic/storage';
 import {CommonServices} from "../../../commons/services/CommonServices";
 import {NavController, NavParams, LoadingController, ToastController} from "ionic-angular";
 import {Keys} from "../../../commons/constants/Keys";
-import {LoginPage} from "../../login/login";
 
 @Component({
   selector: 'page-user-ident-shop',
@@ -55,8 +54,6 @@ export class UserIdentShopPage {
         });
 
         loading.dismiss();
-      } else {
-        this.navCtrl.push(LoginPage);
       }
     });
   }

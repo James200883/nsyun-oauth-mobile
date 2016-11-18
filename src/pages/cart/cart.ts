@@ -6,7 +6,6 @@ import {UserCartService} from "../../commons/services/UserCartService";
 import { Storage } from '@ionic/storage';
 import {Keys} from "../../commons/constants/Keys";
 import {OrderItem} from "../../commons/constants/OrderItem";
-import {LoginPage} from "../login/login";
 import {CheckoutPage} from "../checkout/checkout";
 
 @Component({
@@ -153,8 +152,6 @@ export class CartPage {
             this.commonService.showToastByHtml(this.toastCtrl, result.message);
           }
         });
-      } else {
-        this.navCtrl.push(LoginPage);
       }
     });
   }

@@ -12,9 +12,9 @@
       <p class="userName ellipsis">{{userData.realname}}</p>
     </div>
 
-    <div *ngIf="userData == null">
+    <div *ngIf="userData == null" (click)="goToLogin()">
       <a class="userPic" href="javascript:void(0)"><img src="assets/images/head.png"/></a>
-      <p class="userName ellipsis">未知的人类</p>
+      <p class="userName ellipsis">点击登陆</p>
     </div>
   </div>
 

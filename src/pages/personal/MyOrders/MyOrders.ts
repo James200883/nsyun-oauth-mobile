@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 import {NavController, LoadingController, AlertController, ToastController} from "ionic-angular";
 import {CommonServices} from "../../../commons/services/CommonServices";
 import {Keys} from "../../../commons/constants/Keys";
-import {LoginPage} from "../../login/login";
 import {CheckoutPage} from "../../checkout/checkout";
 
 @Component({
@@ -14,12 +13,12 @@ import {CheckoutPage} from "../../checkout/checkout";
 })
 
 export class MyOrdersPage {
-  flag: string = '0';
-  userId: string;
-  _type: string;
-  page: string = '1';
-  hasMore: boolean = true;
-  orders = [];
+  public flag: string = '0';
+  private userId: string;
+  private _type: string;
+  private page: string = '1';
+  public hasMore: boolean = true;
+  public orders: any = [];
 
   constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private commonService: CommonServices) {}
 
@@ -28,8 +27,6 @@ export class MyOrdersPage {
       if (userInfo) {
         this.userId = userInfo.id;
         this.searchOrders('noPay');
-      } else {
-        this.navCtrl.push(LoginPage);
       }
     });
   }

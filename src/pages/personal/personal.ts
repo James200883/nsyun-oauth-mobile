@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import {Http, URLSearchParams} from '@angular/http';
-import {NavController} from "ionic-angular";
+import {NavController, ModalController} from "ionic-angular";
 import {CommonServices} from "../../commons/services/CommonServices";
 import {Keys} from "../../commons/constants/Keys";
 import {LoginPage} from "../login/login";
@@ -20,11 +20,19 @@ import {UserIdentificationPage} from "./identification/UserIdentification"
 })
 
 export class PersonalPage {
-  userData: Object = null;
+  public userData: any = null;
 
-  constructor (private navCtrl: NavController, private http: Http, private storage: Storage, private commonService: CommonServices) {}
+  constructor (private navCtrl: NavController, private modalCtrl: ModalController, private http: Http, private storage: Storage, private commonService: CommonServices) {}
 
   ionViewDidEnter () {
+    this.loadUserInfo();
+  }
+
+  ionViewWillEnter () {
+    document.querySelector('#tabs .tabbar')['style'].display = 'flex';
+  }
+
+  private loadUserInfo () {
     this.storage.get(Keys.USER_INFO_KEY).then((userInfo) => {
       if (userInfo) {
         let params = new URLSearchParams();
@@ -33,38 +41,68 @@ export class PersonalPage {
         this.http.post(Keys.SERVICE_URL + '/member/userIndex', {headers: Keys.HEADERS}, {search: params}).subscribe((res) => {
           this.userData = res.json().result;
         });
-      } else {
-        this.navCtrl.push(LoginPage);
       }
     });
   }
 
-  ionViewWillEnter () {
-    document.querySelector('#tabs .tabbar')['style'].display = 'flex';
+  goToLogin () {
+    let modal = this.modalCtrl.create(LoginPage);
+    modal.onDidDismiss(() => {
+      this.loadUserInfo();
+    });
+    modal.present();
   }
 
   openDetails (item: number) {
     switch (item) {
       case 1:
-        this.navCtrl.push(MyOrdersPage);
+        if (this.userData) {
+          this.navCtrl.push(MyOrdersPage);
+        } else {
+          this.goToLogin();
+        }
         break;
       case 2:
-        this.navCtrl.push(MyAddressPage);
+        if (this.userData) {
+          this.navCtrl.push(MyAddressPage);
+        } else {
+          this.goToLogin();
+        }
         break;
       case 3:
-        this.navCtrl.push(MyRecommendPage);
+        if (this.userData) {
+          this.navCtrl.push(MyRecommendPage);
+        } else {
+          this.goToLogin();
+        }
         break;
       case 4:
-        this.navCtrl.push(MyCouponPage);
+        if (this.userData) {
+          this.navCtrl.push(MyCouponPage);
+        } else {
+          this.goToLogin();
+        }
         break;
       case 5:
-        this.navCtrl.push(MyMessagesPage);
+        if (this.userData) {
+          this.navCtrl.push(MyMessagesPage);
+        } else {
+          this.goToLogin();
+        }
         break;
       case 6:
-        this.navCtrl.push(SettingsPage);
+        if (this.userData) {
+          this.navCtrl.push(SettingsPage);
+        } else {
+          this.goToLogin();
+        }
         break;
       case 10:
-        this.navCtrl.push(UserIdentificationPage);
+        if (this.userData) {
+          this.navCtrl.push(UserIdentificationPage);
+        } else {
+          this.goToLogin();
+        }
         break;
     }
   }

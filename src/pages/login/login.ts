@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import {CommonServices} from "../../commons/services/CommonServices";
-import {NavController, LoadingController, ModalController, ToastController} from "ionic-angular";
+import {NavController, LoadingController, ModalController, ToastController, ViewController} from "ionic-angular";
 import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
 import {Http, URLSearchParams} from "@angular/http";
-import {PersonalPage} from "../personal/personal";
 import {Keys} from "../../commons/constants/Keys";
 import {RegisterPage} from "../register/register";
 import {ForgotPassPage} from "../forgotPass/forgotPass";
@@ -16,11 +15,11 @@ import {ForgotPassPage} from "../forgotPass/forgotPass";
 })
 
 export class LoginPage {
-  loginForm: FormGroup;
-  mobile: AbstractControl;
-  password: AbstractControl;
+  public loginForm: FormGroup;
+  public mobile: AbstractControl;
+  public password: AbstractControl;
 
-  constructor (private navCtrl: NavController, private toastCtrl: ToastController, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private http: Http, private storage: Storage, private commonService: CommonServices) {
+  constructor (private navCtrl: NavController, private toastCtrl: ToastController, private viewCtrl: ViewController, private formBuilder: FormBuilder, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private http: Http, private storage: Storage, private commonService: CommonServices) {
     this.loginForm = this.formBuilder.group({
       mobile: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.required])]
@@ -52,7 +51,7 @@ export class LoginPage {
         }
         if (result.code == '003') {
           this.storage.set(Keys.USER_INFO_KEY, result.data);
-          this.navCtrl.push(PersonalPage);
+          this.viewCtrl.dismiss();
         }
         if (result.code == '004') {
           this.commonService.showToastByHtml(this.toastCtrl, '手机号码或密码不正确');
@@ -62,13 +61,15 @@ export class LoginPage {
   }
 
   presentRegister () { //注册modal
-    let modal = this.modalCtrl.create(RegisterPage);
-    modal.present();
+    this.navCtrl.push(RegisterPage);
   }
 
   presentForgotPass () { //忘记密码modal
-    let modal = this.modalCtrl.create(ForgotPassPage);
-    modal.present();
+    this.navCtrl.push(ForgotPassPage);
+  }
+
+  dismiss () {
+    this.viewCtrl.dismiss();
   }
 
   clearInput (_form, index): void {

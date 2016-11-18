@@ -4,9 +4,9 @@ import {Storage} from '@ionic/storage';
 import {NavController, LoadingController, AlertController, ActionSheetController} from "ionic-angular";
 import {CommonServices} from "../../../commons/services/CommonServices";
 import {Keys} from "../../../commons/constants/Keys";
-import {LoginPage} from "../../login/login";
 import {NickNamePage} from "./nickName";
 import {Camera, Transfer} from "ionic-native";
+import {PersonalPage} from "../personal";
 
 @Component({
   selector: 'page-settings',
@@ -15,9 +15,9 @@ import {Camera, Transfer} from "ionic-native";
 })
 
 export class SettingsPage {
-  userInfo: any;
-  userSex: number = 3;
-  imageUrl: string;
+  public userInfo: any;
+  public userSex: number = 3;
+  public imageUrl: string;
 
   constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private actionSheetCtrl: ActionSheetController, private storage: Storage, private http: Http, private commonService: CommonServices) {}
 
@@ -33,8 +33,6 @@ export class SettingsPage {
           this.imageUrl = result.imageUrl;
           this.userSex = result.sex;
         });
-      } else {
-        this.navCtrl.push(LoginPage);
       }
     });
   }
@@ -50,7 +48,7 @@ export class SettingsPage {
     this.commonService.showConfirm('确定退出?', this.alertCtrl, (callback) => {
       if (callback) {
         this.storage.remove(Keys.USER_INFO_KEY);
-        this.navCtrl.push(LoginPage);
+        this.navCtrl.push(PersonalPage);
       }
     });
   }

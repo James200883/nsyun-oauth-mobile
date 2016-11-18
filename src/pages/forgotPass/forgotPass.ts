@@ -90,10 +90,6 @@ export class ForgotPassPage {
     });
   }
 
-  dismiss () {
-    this.viewCtrl.dismiss();
-  }
-
   clearInput (_form, index) {
     _form.controls[index].setValue('');
     _form.controls[index]['_pristine'] = true;

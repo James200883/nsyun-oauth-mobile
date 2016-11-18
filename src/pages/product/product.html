@@ -19,7 +19,7 @@
       <h2 class="card-title ellipsis-text">{{productInfo.product.name}}</h2>
       <p class="card-summary ellipsis-text">{{productInfo.product.summary}}</p>
       <ion-row no-padding wrap>
-        <ion-col width-33 *ngFor="let skuItem of productInfo.product.skuItems" class="col-sku">
+        <ion-col width-33 *ngFor="let skuItem of skuItems" class="col-sku">
           <button ion-button outline color="primary" class="btn-sku" *ngIf="skuItem.name == sku" (click)="switchSku(skuItem.name)">{{skuItem.name}}</button>
           <button ion-button outline color="dark" class="btn-sku" *ngIf="skuItem.name != sku" (click)="switchSku(skuItem.name)">{{skuItem.name}}</button>
         </ion-col>

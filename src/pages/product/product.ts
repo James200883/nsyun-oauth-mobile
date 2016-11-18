@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, AlertController, LoadingController, ToastController} from 'ionic-angular';
+import {NavController, AlertController, LoadingController, ToastController, ModalController} from 'ionic-angular';
 import {Http,URLSearchParams} from '@angular/http';
 import { Storage } from '@ionic/storage';
 import {NavParams} from "ionic-angular/index";
@@ -24,8 +24,9 @@ export class ProductPage {
   public imageItems: any;
   public options: any = {initialSlide: 0, loop: true, autoplay: 3000};
   public sku: string = null;
+  public skuItems: any;
 
-  constructor (public navCtrl: NavController, private navParams: NavParams, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private commonService: CommonServices, private userCartService: UserCartService) {
+  constructor (public navCtrl: NavController, private modalCtrl: ModalController, private navParams: NavParams, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private commonService: CommonServices, private userCartService: UserCartService) {
     this.productId = navParams.get('id');
   }
 
@@ -44,6 +45,10 @@ export class ProductPage {
    * 进入页面加载数据
    */
   ionViewDidEnter () {
+    this.loadData();
+  }
+
+  private loadData () {
     let params = new URLSearchParams();
     params.set('id', this.productId);
 
@@ -52,12 +57,21 @@ export class ProductPage {
       if (result) {
         this.productInfo = result.productInfo;
         this.imageItems = result.imageItems;
+        this.skuItems = result.productInfo.product.skuItems;
       }
     });
   }
 
   switchSku(skuName){
     this.sku = skuName;
+  }
+
+  private goToLogin () {
+    let modal = this.modalCtrl.create(LoginPage);
+    modal.onDidDismiss(() => {
+      this.loadData();
+    });
+    modal.present();
   }
 
   /**
@@ -84,7 +98,7 @@ export class ProductPage {
               }
             });
           } else {
-            this.navCtrl.push(LoginPage);
+            this.goToLogin();
           }
         });
       }
@@ -95,7 +109,7 @@ export class ProductPage {
    * 立即购买
    */
   doBuy () {
-    if (this.productInfo.product.skuItems && !this.sku) {
+    if (this.skuItems && this.skuItems.length > 0 && !this.sku) {
       this.commonService.showToastByHtml(this.toastCtrl, '请选择颜色');
       return;
     }
@@ -121,7 +135,7 @@ export class ProductPage {
                 let orderItem = new OrderItem(data);
                 this.userCartService.addOrderItem(orderItem, userInfo.id);
               } else {
-                this.navCtrl.push(LoginPage);
+                this.goToLogin();
               }
             });
           }},
@@ -146,7 +160,7 @@ export class ProductPage {
 
                 this.navCtrl.push(CartPage);
               } else {
-                this.navCtrl.push(LoginPage);
+                this.goToLogin();
               }
             });
           }
@@ -183,7 +197,7 @@ export class ProductPage {
               }
             });
           } else {
-            this.navCtrl.push(LoginPage);
+            this.goToLogin();
           }
         });
       }

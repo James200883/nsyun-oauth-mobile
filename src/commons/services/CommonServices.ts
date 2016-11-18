@@ -68,8 +68,7 @@ export class CommonServices {
     toastCtrl.create({
       message: message,
       duration: 3000,
-      position: 'middle',
-      dismissOnPageChange: true
+      position: 'top'
     }).present();
   }
 }

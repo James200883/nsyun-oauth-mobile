@@ -7,7 +7,7 @@ import {NavController, NavParams} from "ionic-angular";
 })
 
 export class MyMessagesContentPage {
-  messageContent: string
+  public messageContent: string;
 
   constructor (public navCtrl: NavController, private navParams: NavParams) {
     this.messageContent = navParams.get('messageContent');

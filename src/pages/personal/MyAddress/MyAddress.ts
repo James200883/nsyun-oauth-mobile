@@ -4,7 +4,6 @@ import {Storage} from '@ionic/storage'
 import {CommonServices} from "../../../commons/services/CommonServices";
 import {NavController, LoadingController, AlertController, NavParams, ToastController} from "ionic-angular";
 import {Keys} from "../../../commons/constants/Keys";
-import {LoginPage} from "../../login/login";
 import {AddEditAddressPage} from "./AddEditAddress";
 
 @Component({
@@ -14,7 +13,7 @@ import {AddEditAddressPage} from "./AddEditAddress";
 })
 
 export class MyAddressPage {
-  addresses = [];
+  public addresses: any = [];
   private userId: string;
 
   constructor (public navCtrl: NavController, public params: NavParams, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private commonService: CommonServices) {
@@ -29,8 +28,6 @@ export class MyAddressPage {
           this.addresses = res.json().data;
           loading.dismiss();
         });
-      } else {
-        this.navCtrl.push(LoginPage);
       }
     });
   }

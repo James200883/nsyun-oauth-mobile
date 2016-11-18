@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { Storage } from '@ionic/storage';
-import {ViewController, NavController, LoadingController, ToastController} from "ionic-angular";
+import {NavController, LoadingController, ToastController} from "ionic-angular";
 import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
 import {CommonServices} from "../../commons/services/CommonServices";
 import {Http, URLSearchParams} from "@angular/http";
@@ -22,7 +22,7 @@ export class RegisterPage {
   btnCode: string = '获取短信验证码';
   isBtnCode: boolean = false;
 
-  constructor (private viewCtrl: ViewController, private navCtrl: NavController, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private formBuilder: FormBuilder, private commonService: CommonServices) {
+  constructor (private navCtrl: NavController, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private formBuilder: FormBuilder, private commonService: CommonServices) {
     this.registerForm = formBuilder.group({
       'mobile': ['', Validators.compose([Validators.required, Validators.pattern('1[34578]\\d{9}')])],
       'codes': ['', Validators.compose([Validators.required])],
@@ -82,8 +82,9 @@ export class RegisterPage {
     let params = new URLSearchParams();
     params.set('mobile', mobile);
 
-    this.http.post(Keys.USER_INFO_KEY + '/register/getMessageCode', {headers: Keys.HEADERS}, {search: params}).subscribe((res) => {
+    this.http.post(Keys.SERVICE_URL + '/register/getMessageCode', {headers: Keys.HEADERS}, {search: params}).subscribe((res) => {
       let result = res.json();
+      console.log(result);
       if (result.code == '200') {
         this.commonService.showToastByHtml(this.toastCtrl, '已发送');
         let count = 60, timer = null;
@@ -108,10 +109,6 @@ export class RegisterPage {
         this.commonService.showToastByHtml(this.toastCtrl, '服务器或网络异常, 请稍后再试');
       }
     });
-  }
-
-  dismiss () {
-    this.viewCtrl.dismiss();
   }
 
   clearInput (_form, index) {

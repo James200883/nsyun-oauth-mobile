@@ -4,7 +4,6 @@ import {Storage} from '@ionic/storage';
 import {CommonServices} from "../../../commons/services/CommonServices";
 import {NavController, LoadingController} from "ionic-angular";
 import {Keys} from "../../../commons/constants/Keys";
-import {LoginPage} from "../../login/login";
 
 @Component({
   selector: 'page-my-coupon',
@@ -13,7 +12,7 @@ import {LoginPage} from "../../login/login";
 })
 
 export class MyCouponPage {
-  couponData = [];
+  public couponData: any = [];
 
   constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private http: Http, private storage: Storage, private commonService: CommonServices) {}
 
@@ -28,8 +27,6 @@ export class MyCouponPage {
           this.couponData = res.json().data;
           loading.dismiss();
         });
-      } else {
-        this.navCtrl.push(LoginPage);
       }
     });
   }
