@@ -66,7 +66,13 @@ import {SelectAddressPage} from "../pages/checkout/selectAddress";
     SelectAddressPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      mode: 'ios',
+      iconMode: 'ios',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',
+      pageTransition: 'ios'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
