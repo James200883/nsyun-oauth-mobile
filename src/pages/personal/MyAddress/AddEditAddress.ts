@@ -38,6 +38,9 @@ export class AddEditAddressPage {
     if (this.addressId) {
       this.getAddressById(this.addressId);
     }
+    if (!this.addressId) {
+      this.addressId = '0';
+    }
 
     this.addressForm = formBuilder.group({
       'contactUserName': ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(15)])],
@@ -61,6 +64,7 @@ export class AddEditAddressPage {
    * @param addressInfo
    */
   addEditAddress (addressInfo) {
+    console.log(this.addressId);
     if (this.addressForm.valid) {
       if (this.provinceName == '省' || this.citiesName == '市' || this.areaName == '区') {
         this.commonService.showToastByHtml(this.toastCtrl, '请选择区域');

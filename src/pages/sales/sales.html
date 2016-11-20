@@ -38,8 +38,8 @@
               <div class="sell-info">
                 <div class="price">
                   <span class="dis-price">￥{{item.distPrice}}</span>
-                  <span class="origin-price">￥{{item.price}}</span>
                 </div>
+                <span class="origin-price">￥{{item.price}}</span>
                 <p *ngIf="item.category.id == 3">月销{{item.countSale}}笔<span class="product-special">惠农</span></p>
                 <p *ngIf="item.category.id != 3">月销{{item.countSale}}笔</p>
               </div>
