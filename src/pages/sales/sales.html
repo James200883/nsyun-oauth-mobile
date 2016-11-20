@@ -14,41 +14,39 @@
     </ion-fab-list>
   </ion-fab>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col width-15 class="background-category">
-        <ion-list no-lines class="ion-list">
-          <ion-item (click)="categorySelected('')">
-            <span *ngIf="curCategoryNo == ''" color="danger">全部</span>
-            <span *ngIf="curCategoryNo != ''">全部</span>
-          </ion-item>
-          <ion-item *ngFor="let category of listCategory" (click)="categorySelected(category.categoryNo)">
-            <span *ngIf="category.categoryNo == curCategoryNo" color="danger">{{category.name}}</span>
-            <span *ngIf="category.categoryNo != curCategoryNo">{{category.name}}</span>
-          </ion-item>
-        </ion-list>
-      </ion-col>
+  <ion-row>
+    <ion-col width-25 class="background-category">
+      <ion-list no-lines class="ion-list">
+        <ion-item (click)="categorySelected('')">
+          <span *ngIf="curCategoryNo == ''" color="danger">全部</span>
+          <span *ngIf="curCategoryNo != ''">全部</span>
+        </ion-item>
+        <ion-item *ngFor="let category of listCategory" (click)="categorySelected(category.categoryNo)">
+          <span *ngIf="category.categoryNo == curCategoryNo" color="danger">{{category.name}}</span>
+          <span *ngIf="category.categoryNo != curCategoryNo">{{category.name}}</span>
+        </ion-item>
+      </ion-list>
+    </ion-col>
 
-      <ion-col width-85>
-        <ion-list no-lines class="ion-list">
-          <ion-item>
-            <ion-row wrap class="item-detail">
-              <ion-col *ngFor="let item of items" class="col-detail" width-50>
-                <img (click)="goToProductPage(item.id)" [src]="item.imageUrl"/>
-                <div class="ellipsis-text">{{item.name}}</div>
-                <div class="sell-info">
-                  <div class="price">
-                    <span class="dis-price">￥{{item.distPrice}}</span>
-                    <span class="origin-price">￥{{item.price}}</span>
-                  </div>
-                  <p *ngIf="item.category.id == 3">月销{{item.countSale}}笔<span class="product-special">惠农</span></p>
-                  <p *ngIf="item.category.id != 3">月销{{item.countSale}}笔</p>
+    <ion-col width-75>
+      <ion-list no-lines class="ion-list">
+        <ion-item>
+          <ion-row wrap class="item-detail">
+            <ion-col *ngFor="let item of items" class="col-detail" width-50>
+              <img (click)="goToProductPage(item.id)" [src]="item.imageUrl"/>
+              <div class="ellipsis-text">{{item.name}}</div>
+              <div class="sell-info">
+                <div class="price">
+                  <span class="dis-price">￥{{item.distPrice}}</span>
+                  <span class="origin-price">￥{{item.price}}</span>
                 </div>
-              </ion-col>
-            </ion-row>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+                <p *ngIf="item.category.id == 3">月销{{item.countSale}}笔<span class="product-special">惠农</span></p>
+                <p *ngIf="item.category.id != 3">月销{{item.countSale}}笔</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 </ion-content>
