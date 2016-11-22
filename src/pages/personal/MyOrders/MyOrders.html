@@ -8,10 +8,10 @@
 
   <ion-toolbar no-border>
     <ion-segment [(ngModel)]="flag">
-      <ion-segment-button value="0">
+      <ion-segment-button value="0" (click)="searchOrders('noPay')">
         未支付订单
       </ion-segment-button>
-      <ion-segment-button value="1">
+      <ion-segment-button value="1" (click)="searchOrders('hasPay')">
         已支付订单
       </ion-segment-button>
       <!--<ion-segment-button value="2">
@@ -41,6 +41,7 @@
           <div class="total-tips">共{{order.items.length}}件商品 实付款:￥{{order.amount}}</div>
         </ion-card>
         <button ion-button outline small color="secondary" class="opt-btn" (click)="goPay(order)">去支付</button>
+        <button ion-button outline small color="dark" class="opt-btn" (click)="delOrder(order.orderId, ind)">删除订单</button>
       </ion-item>
     </ion-list>
 
@@ -61,7 +62,7 @@
           </ion-card-content>
           <div class="total-tips">共{{order.items.length}}件商品 实付款:￥{{order.amount}}</div>
         </ion-card>
-        <button ion-button outline small color="dark" class="opt-btn" (click)="delOrder(order.orderId, ind)">删除订单</button>
+
       </ion-item>
     </ion-list>
 

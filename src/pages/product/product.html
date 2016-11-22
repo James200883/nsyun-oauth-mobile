@@ -29,9 +29,9 @@
         <ion-col width-33><p class="origin-price">价格 ￥{{productInfo.product.price}}</p></ion-col>
         <ion-col width-33><p class="sale-count">月销 {{productInfo.product.countSale}}</p></ion-col>
         <ion-col width-33>
-          <button ion-button class="btn-option" color="danger" *ngIf="productInfo.product.category.id == 1" (click)="doGiftConfirm()">免费领取</button>
-          <button ion-button class="btn-option" color="danger" *ngIf="productInfo.product.category.id == 2" (click)="doBuy()">立即购买</button>
-          <button ion-button class="btn-option" color="danger" *ngIf="productInfo.product.category.id == 3" (click)="doAppoint()">申请惠农产品</button>
+          <button ion-button class="btn-option" color="danger" *ngIf="categoryType == '10'" (click)="doGiftConfirm()">免费领取</button>
+          <button ion-button class="btn-option" color="danger" *ngIf="categoryType == '20'" (click)="doBuy()">立即购买</button>
+          <button ion-button class="btn-option" color="danger" *ngIf="categoryType == '30'" (click)="doAppoint()">申请惠农产品</button>
         </ion-col>
       </ion-row>
     </ion-card-content>

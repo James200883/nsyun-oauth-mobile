@@ -25,6 +25,7 @@ export class ProductPage {
   public options: any = {initialSlide: 0, loop: true, autoplay: 3000};
   public sku: string = null;
   public skuItems: any;
+  public categoryType:any;
 
   constructor (public navCtrl: NavController, private modalCtrl: ModalController, private navParams: NavParams, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http, private storage: Storage, private commonService: CommonServices, private userCartService: UserCartService) {
     this.productId = navParams.get('id');
@@ -58,6 +59,8 @@ export class ProductPage {
         this.productInfo = result.productInfo;
         this.imageItems = result.imageItems;
         this.skuItems = result.productInfo.product.skuItems;
+        let categoryNo = result.productInfo.product.category.categoryNo + '';
+        this.categoryType = categoryNo.substr(0,2);
       }
     });
   }
@@ -159,6 +162,7 @@ export class ProductPage {
                 this.userCartService.addOrderItem(orderItem, userInfo.id);
 
                 this.navCtrl.push(CartPage);
+
               } else {
                 this.goToLogin();
               }

@@ -12,6 +12,7 @@ import {MyCouponPage} from "./MyCoupon/MyCoupon";
 import {MyMessagesPage} from "./MyMessages/MyMessages";
 import {SettingsPage} from "./settings/settings";
 import {UserIdentificationPage} from "./identification/UserIdentification"
+import {AboutPage} from "./about/about"
 
 @Component({
   selector: 'page-personal',
@@ -93,6 +94,13 @@ export class PersonalPage {
       case 6:
         if (this.userData) {
           this.navCtrl.push(SettingsPage);
+        } else {
+          this.goToLogin();
+        }
+        break;
+      case 7:
+        if (this.userData) {
+          this.navCtrl.push(AboutPage);
         } else {
           this.goToLogin();
         }

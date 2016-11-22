@@ -31,6 +31,7 @@ import {UserIdentificationPage} from "../pages/personal/identification/UserIdent
 import {UserIdentShopPage} from "../pages/personal/identification/UserIdentShop";
 import {NickNamePage} from "../pages/personal/settings/nickName";
 import {SelectAddressPage} from "../pages/checkout/selectAddress";
+import {AboutPage} from "../pages/personal/about/about";
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {SelectAddressPage} from "../pages/checkout/selectAddress";
     UserIdentificationPage,
     UserIdentShopPage,
     NickNamePage,
-    SelectAddressPage
+    SelectAddressPage,
+    AboutPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -101,7 +103,8 @@ import {SelectAddressPage} from "../pages/checkout/selectAddress";
     UserIdentificationPage,
     UserIdentShopPage,
     NickNamePage,
-    SelectAddressPage
+    SelectAddressPage,
+    AboutPage
   ],
   providers: [Storage]
 })
