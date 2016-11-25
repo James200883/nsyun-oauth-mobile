@@ -32,6 +32,8 @@ import {UserIdentShopPage} from "../pages/personal/identification/UserIdentShop"
 import {NickNamePage} from "../pages/personal/settings/nickName";
 import {SelectAddressPage} from "../pages/checkout/selectAddress";
 import {AboutPage} from "../pages/personal/about/about";
+import {AddSaleMaintPage} from "../pages/personal/MySaleMaint/AddSaleMaint";
+import {MySaleMaintPage} from "../pages/personal/MySaleMaint/MySaleMaint";
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import {AboutPage} from "../pages/personal/about/about";
     UserIdentShopPage,
     NickNamePage,
     SelectAddressPage,
-    AboutPage
+    AboutPage,
+    AddSaleMaintPage,
+    MySaleMaintPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -104,7 +108,9 @@ import {AboutPage} from "../pages/personal/about/about";
     UserIdentShopPage,
     NickNamePage,
     SelectAddressPage,
-    AboutPage
+    AboutPage,
+    AddSaleMaintPage,
+    MySaleMaintPage
   ],
   providers: [Storage]
 })

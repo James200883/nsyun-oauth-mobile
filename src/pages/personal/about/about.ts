@@ -3,11 +3,10 @@
  */
 
 import {Component} from '@angular/core';
-import {Http, URLSearchParams} from '@angular/http';
+import {Http} from '@angular/http';
 import {Storage} from '@ionic/storage';
 import {CommonServices} from "../../../commons/services/CommonServices";
 import {LoadingController} from "ionic-angular";
-import {Keys} from "../../../commons/constants/Keys";
 
 @Component({
   selector: 'page-my-about',

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar hideBackButton no-border-bottom>
+    <ion-buttons start>
+      <button ion-button color="dark" navPop><ion-icon name="arrow-back" class="btn-back"></ion-icon></button>
+    </ion-buttons>
+    <ion-title text-center>管理售后服务</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form (submit)="addSaleMaint()" novalidate>
+    <ion-list class="ion-list" no-lines>
+      <ion-item>
+        <ion-label>选择售后服务</ion-label>
+        <ion-select [(ngModel)]="saleMaint.type" name="type">
+          <ion-option value="1">安装</ion-option>
+          <ion-option value="2">维修</ion-option>
+          <ion-option value="3">换货</ion-option>
+          <ion-option value="4">其它意见</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>地址</ion-label>
+        <ion-textarea placeholder="详细地址" rows="3" [value]="saleMaint.address" name="address"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>说明</ion-label>
+        <ion-textarea placeholder="详细信息" rows="3" [value]="saleMaint.info" name="info"></ion-textarea>
+      </ion-item>
+
+    </ion-list>
+    <div padding class="btn-save">
+      <button ion-button block type="submit" color="danger">保存</button>
+    </div>
+  </form>
+</ion-content>
