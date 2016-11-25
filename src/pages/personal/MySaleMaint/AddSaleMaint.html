@@ -22,12 +22,12 @@
 
       <ion-item>
         <ion-label>地址</ion-label>
-        <ion-textarea placeholder="详细地址" rows="3" [value]="saleMaint.address" name="address"></ion-textarea>
+        <ion-textarea placeholder="详细地址" rows="3" [(ngModel)]="saleMaint.address" name="address"></ion-textarea>
       </ion-item>
 
       <ion-item>
         <ion-label>说明</ion-label>
-        <ion-textarea placeholder="详细信息" rows="3" [value]="saleMaint.info" name="info"></ion-textarea>
+        <ion-textarea placeholder="详细信息" rows="3" [(ngModel)]="saleMaint.info" name="info"></ion-textarea>
       </ion-item>
 
     </ion-list>

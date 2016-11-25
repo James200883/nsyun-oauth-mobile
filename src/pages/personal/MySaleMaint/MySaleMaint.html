@@ -13,18 +13,18 @@
       <ion-card>
         <ion-card-header>
           <ion-row>
-            <ion-col width-67><span style="font-size:18px;font-color:red;">{{saleMaint.createDateString}} {{saleMaint.typeString}}</span></ion-col>
-            <ion-col width-33><span>{{saleMaint.statusString}}</span></ion-col>
+            <ion-col width-67><span>{{saleMaint.createDateString}} {{saleMaint.typeString}}</span></ion-col>
+            <ion-col width-33><span style="font-size:18px;color:red;">{{saleMaint.statusString}}</span></ion-col>
           </ion-row>
         </ion-card-header>
         <ion-card-content>
-          <div class="address-context"><span style="font-size:18px;font-color:red;">信息:</span>{{saleMaint.info}}</div>
-          <div class="address-context"><span style="font-size:18px;font-color:red;">地址:</span>{{saleMaint.address}}</div>
-          <div class="address-context"><span style="font-size:18px;font-color:red;">处理信息：</span>{{saleMaint.infoDeal}}</div>
+          <div class="address-context"><span style="font-size:18px;color:blue;">信息:{{saleMaint.info}}</span></div>
+          <div class="address-context"><span style="font-size:18px;color:blue;">地址:{{saleMaint.address}}</span></div>
+          <div class="address-context"><span style="font-size:18px;color:blue;">处理信息：{{saleMaint.infoDeal}}</span></div>
         </ion-card-content>
       </ion-card>
-      <button ion-button outline small color="dark" class="btn" (tap)="addEdit(saleMaint.id)">编辑</button>
-      <button ion-button outline small color="dark" class="btn" (tap)="delSaleMaint(saleMaint.id)">删除</button>
+      <button ion-button outline small color="blue" class="btn" (tap)="addEdit(saleMaint.id)">编辑</button>
+      <button ion-button outline small color="danger" class="btn" (tap)="delSaleMaint(saleMaint.id)">删除</button>
     </ion-item>
   </ion-list>
 </ion-content>
