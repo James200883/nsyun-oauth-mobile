@@ -4,7 +4,7 @@ import {Http,URLSearchParams} from '@angular/http';
 import {CommonServices} from "../../commons/services/CommonServices";
 import {Keys} from "../../commons/constants/Keys";
 import {SelectAddressPage} from "./selectAddress";
-//import {AliPay} from "ionic-native";
+import {AliPay} from "ionic-native";
 import {MyOrdersPage} from "../personal/MyOrders/MyOrders";
 
 @Component({
@@ -103,12 +103,11 @@ export class CheckoutPage {
     params.set('subject', this.orderInfos.items[0].name);
     params.set('body', this.orderInfos.items[0].name);
     params.set('price', this.orderInfos.amount);
-    //params.set('price', '0.01');
     params.set('notifyUrl', Keys.SERVICE_URL + '/aliPay/payCallBack');
 
     this.http.post(Keys.SERVICE_URL + '/aliPay/getPayInfo', {headers: Keys.HEADERS}, {search: params}).subscribe((res) => {
       let payInfo = res.json().payInfo;
-      /*
+
       AliPay.pay(payInfo).then((result) => {
         let status = result.resultStatus;
         if (status == 9000) {
@@ -119,7 +118,7 @@ export class CheckoutPage {
         } else {
           this.commonService.showToastByHtml(this.toastCtrl, '支付失败');
         }
-      });*/
+      });
     });
   }
 }

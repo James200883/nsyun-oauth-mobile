@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
-import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
-import {NavController, LoadingController, ModalController, NavParams, ToastController} from "ionic-angular";
+import {NavController, LoadingController, NavParams, ToastController} from "ionic-angular";
 import {CommonServices} from "../../../commons/services/CommonServices";
 import {Keys} from "../../../commons/constants/Keys";
 import {MySaleMaintPage} from "./MySaleMaint";
@@ -15,10 +14,10 @@ import {MySaleMaintPage} from "./MySaleMaint";
 export class AddSaleMaintPage {
   private saleMaintId: string;
   private userId: string;
-  private saleMaint:any = {'type':'','address':'','info':''};
+  public saleMaint:any = {'type':'','address':'','info':''};
 
 
-  constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private toastCtrl: ToastController, private http: Http, private formBuilder: FormBuilder, private navParams: NavParams, private commonService: CommonServices) {
+  constructor (public navCtrl: NavController, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http, private navParams: NavParams, private commonService: CommonServices) {
     this.saleMaintId = navParams.get('saleMaintId');
     this.userId = navParams.get('userId');
     if (this.saleMaintId) {
