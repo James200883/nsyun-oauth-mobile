@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>认证会员信息</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg">
+  <ion-card *ngIf="certShops">
+    <img src="{{certShops.imageUrl}}"/>
+    <ion-card-content>
+      <ion-card-title>{{certShops.shopName}}</ion-card-title>
+      <p>{{certShops.province}}{{certShops.city}}{{certShops.area}}{{certShops.address}}</p>
+    </ion-card-content>
+    <button ion-button small outline color="secondary" class="pull-right" (click)="certOrModify('1')">更新认证信息</button>
+  </ion-card>
+</ion-content>
+
+<ion-footer *ngIf="!certShops">
+  <ion-toolbar no-border>
+    <button ion-button block color="primary" (click)="certOrModify('0')">去认证</button>
+  </ion-toolbar>
+</ion-footer>

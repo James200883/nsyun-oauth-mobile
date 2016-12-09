@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>购物车</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg">
+  <div class="card" *ngIf="cartList && cartList.length > 0">
+    <div class="card-header" padding-bottom padding-top>
+      <ion-checkbox color="danger" [(ngModel)]="isChecked" (ionChange)="notificationAll()"></ion-checkbox>
+      <span>育龙自营</span>
+    </div>
+    <ion-list class="list-full-border" no-margin>
+      <ion-item-sliding *ngFor="let item of cartList; let ind = index">
+        <ion-item class="product">
+          <ion-checkbox color="danger" [(ngModel)]="item.isChecked" (click)="notificationItem(item)"></ion-checkbox>
+          <ion-thumbnail item-left>
+            <img src="{{item.imageUrl}}"/>
+          </ion-thumbnail>
+          <ion-label>
+            <div>
+              <div text-wrap class="product-name">{{item.name}}</div>
+              <div class="text-sm">
+                <span color="gray" *ngIf="item.sku">{{item.sku}}</span>
+              </div>
+              <div padding-bottom>
+                <span class="pull-left o-price" color="gray">￥{{item.distPrice}} x {{item.qty}}</span>
+                <span class="pull-right price">￥{{item.distPrice * item.qty}}</span>
+                <div class="clear"></div>
+              </div>
+              <div>
+                <div class="input-qty">
+                  <button ion-button icon-only small color="light" class="btn" (click)="quantityChange(item, 0)">
+                    <ion-icon name="ios-remove"></ion-icon>
+                  </button>
+                  <input type="tel" value="{{item.qty}}"/>
+                  <button ion-button icon-only small color="light" class="btn" (click)="quantityChange(item, 1)">
+                    <ion-icon name="ios-add"></ion-icon>
+                  </button>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </div>
+          </ion-label>
+        </ion-item>
+
+        <ion-item-options side="right">
+          <button ion-button color="primary" (click)="delItem(ind)">删除</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <ion-row class="empty-cart" *ngIf="cartList && cartList.length == 0">
+    <ion-col>
+      <div class="tips">
+        <p text-center>购物车是空的</p>
+        <p text-center>去挑几件中意的商品吧</p>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<ion-footer class="cart-footer" *ngIf="cartList && cartList.length > 0">
+  <ion-row>
+    <ion-col width-25>
+      <ion-checkbox color="danger" [(ngModel)]="isChecked" (ionChange)="notificationAll()"></ion-checkbox>
+      <span>全选</span>
+    </ion-col>
+    <ion-col width-25>
+      <span color="gray">合计: </span>
+      <span class="bold" color="danger">￥{{totalAmount}}</span>
+    </ion-col>
+    <ion-col width-50>
+      <button ion-button block color="danger" (click)="doOrder()">结算</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+

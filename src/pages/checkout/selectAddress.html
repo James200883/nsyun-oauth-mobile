@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar color="light">
+    <ion-buttons start>
+      <button ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>收货地址</ion-title>
+
+    <ion-buttons end>
+      <button ion-button clear color="secondary" (click)="addressManager()">管理</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list no-border>
+    <ion-item *ngFor="let address of addresses" (click)="selectAddress(address)">
+      <ion-card>
+        <ion-card-header>
+          <ion-row>
+            <ion-col width-67><span>{{address.contactUserName}}</span></ion-col>
+            <ion-col width-33><span>{{address.contractTel}}</span></ion-col>
+          </ion-row>
+        </ion-card-header>
+        <ion-card-content>
+          <div>{{address.province}}{{address.city}}{{address.area}}{{address.address}}</div>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

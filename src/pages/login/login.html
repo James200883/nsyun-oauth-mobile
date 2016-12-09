@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar color="light">
+    <ion-buttons start>
+      <button ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>用户登陆</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="loginForm" (submit)="userLogin(loginForm)">
+    <ion-list class="list-form">
+      <ion-item>
+        <ion-icon name="ios-phone-portrait-outline"></ion-icon>
+        <input type="tel" placeholder="请输入手机号" [formControl]="mobile"/>
+        <ion-icon name="close" item-right [hidden]="mobile.value.length == 0" (click)="clearInput(loginForm, 'mobile')"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="ios-lock-outline"></ion-icon>
+        <input type="password" placeholder="请输入密码" [formControl]="password"/>
+        <ion-icon name="close" item-right [hidden]="password.value.length == 0" (click)="clearInput(loginForm, 'password')"></ion-icon>
+      </ion-item>
+    </ion-list>
+    <button ion-button block type="submit" color="primary" [disabled]="!loginForm.valid">登录</button>
+  </form>
+
+  <div text-right margin-top margin-bottom class="forgot-pass" (click)="forgetPass()">忘记密码?</div>
+  <div class="align-bottom register" padding text-center>
+    没有账号? <a class="bold" href="javascript:void(0)" (click)="register()">注册一个</a>
+  </div>
+</ion-content>

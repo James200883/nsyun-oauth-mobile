@@ -1,0 +1,113 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>我的订单</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg">
+  <ion-segment color="primary" [(ngModel)]="flag">
+    <ion-segment-button value="0" (click)="searchOrders('noPay')">
+      未支付订单
+    </ion-segment-button>
+    <ion-segment-button value="1" (click)="searchOrders('hasPay')">
+      已支付订单
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="flag">
+    <ion-list *ngSwitchCase="'0'">
+      <ion-item *ngFor="let order of orders; let ind = index">
+        <ion-card>
+          <ion-card-header class="card-header">
+            <ion-row>
+              <ion-col width-80><div>订单编号：{{order.orderNo}}</div></ion-col>
+              <ion-col width-20><p>未支付</p></ion-col>
+            </ion-row>
+          </ion-card-header>
+
+          <ion-card-content class="card-content">
+            <ion-item *ngFor="let orderItem of order.items">
+              <ion-row>
+                <ion-col width-20>
+                  <ion-thumbnail item-left>
+                    <img src="{{orderItem.imageUrl}}"/>
+                  </ion-thumbnail>
+                </ion-col>
+
+                <ion-col width-80>
+                  <div item-right>
+                    <div text-wrap class="product-name">{{orderItem.name}}</div>
+                    <div padding-bottom class="product-price">
+                      <span class="pull-right">￥{{orderItem.distPrice}} x {{orderItem.qty}}</span>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-card-content>
+          <div class="card-footer">
+            <ion-row>
+              <ion-col text-left>
+                <div class="total-tips pull-right">共{{order.items.length}}件商品 实付款:￥{{order.amount}}</div>
+              </ion-col>
+              <ion-col text-right>
+                <button ion-button outline small color="green" (click)="goPay(order)">去支付</button>
+                <button ion-button outline small color="orange" (click)="delOrder(order.orderId, ind)">删除订单</button>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-card>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'1'" class="order-list">
+      <ion-item *ngFor="let order of orders; let ind = index">
+        <ion-card>
+          <ion-card-header class="card-header">
+            <ion-row>
+              <ion-col width-80><div>订单编号：{{order.orderNo}}</div></ion-col>
+              <ion-col width-20><p>未支付</p></ion-col>
+            </ion-row>
+          </ion-card-header>
+
+          <ion-card-content class="card-content">
+            <ion-item *ngFor="let orderItem of order.items">
+              <ion-row>
+                <ion-col width-20>
+                  <ion-thumbnail item-left>
+                    <img src="{{orderItem.imageUrl}}"/>
+                  </ion-thumbnail>
+                </ion-col>
+
+                <ion-col width-80>
+                  <div item-right>
+                    <div text-wrap class="product-name">{{orderItem.name}}</div>
+                    <div padding-bottom class="product-price">
+                      <span class="pull-right">￥{{orderItem.distPrice}} x {{orderItem.qty}}</span>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-card-content>
+          <div class="card-footer">
+            <ion-row>
+              <ion-col text-left>
+                <div class="total-tips pull-right">共{{order.items.length}}件商品 实付款:￥{{order.amount}}</div>
+              </ion-col>
+              <ion-col text-right>
+                <button ion-button outline small color="orange" (click)="delOrder(order.orderId, ind)">删除订单</button>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-card>
+      </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasMore">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

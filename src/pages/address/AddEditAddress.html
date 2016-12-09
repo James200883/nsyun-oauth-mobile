@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>管理收货地址</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="addressForm" (submit)="addEditAddress(addressForm)" novalidate>
+    <ion-list no-lines>
+      <ion-item>
+        <ion-input type="text" placeholder="收货人姓名" [formControl]="contactUserName"></ion-input>
+      </ion-item>
+      <div class="error-box" *ngIf="contactUserName.hasError('required') && contactUserName.touched">请填写收货人姓名</div>
+      <div class="error-box" *ngIf="(contactUserName.hasError('minlength') || contactUserName.hasError('maxlength')) && contactUserName.touched">收货人姓名:2-15个字符限制</div>
+      <div class="lines"></div>
+
+      <ion-item>
+        <ion-input type="tel" placeholder="手机号码" [formControl]="contractTel"></ion-input>
+      </ion-item>
+      <div class="error-box" *ngIf="contractTel.hasError('required') && contractTel.touched">请填写手机号码</div>
+      <div class="error-box" *ngIf="contractTel.hasError('pattern') && !contractTel.hasError('required') && contractTel.touched">手机号码格式不正确</div>
+      <div class="lines"></div>
+
+      <ion-row>
+        <ion-col width-33><button ion-item no-lines type="button" (click)="selectProvince()"><span>{{provinceName}}</span></button></ion-col>
+        <ion-col width-33><button ion-item no-lines type="button" (click)="selectCities()"><span>{{citiesName}}</span></button></ion-col>
+        <ion-col width-33><button ion-item no-lines type="button" (click)="selectArea()"><span>{{areaName}}</span></button></ion-col>
+      </ion-row>
+      <div class="lines"></div>
+
+      <ion-item>
+        <ion-input type="tel" placeholder="区域编码" [formControl]="addressCode"></ion-input>
+      </ion-item>
+      <div class="error-box" *ngIf="addressCode.hasError('required') && addressCode.touched">请填写区域编码</div>
+      <div class="error-box" *ngIf="(addressCode.hasError('minlength') || addressCode.hasError('maxlength')) && addressCode.touched">区域编码:6位数字限制</div>
+      <div class="lines"></div>
+
+      <ion-item>
+        <ion-textarea placeholder="详细地址" rows="3" [formControl]="address"></ion-textarea>
+      </ion-item>
+      <div class="error-box" *ngIf="address.hasError('required') && address.touched">请填写详细地址</div>
+      <div class="error-box" *ngIf="(address.hasError('minlength') || address.hasError('maxlength')) && address.touched">详细地址:5-60个字符限制</div>
+      <div class="lines"></div>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block type="submit" color="primary" [disabled]="!addressForm.valid">保存</button>
+    </div>
+  </form>
+</ion-content>

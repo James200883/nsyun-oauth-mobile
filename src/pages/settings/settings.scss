@@ -1,0 +1,16 @@
+page-settings {
+  ion-list {
+    button {
+      span {font-size: 1.5rem; font-weight: normal;}
+      span.right {margin-right: 3rem !important;}
+      ion-avatar {
+        margin-right: 3rem !important;
+      }
+    }
+  }
+}
+
+page-nickname {
+  ion-list {margin-top: 1rem;}
+  p.tips {color: #c5c5c5; margin-top: -2rem;}
+}

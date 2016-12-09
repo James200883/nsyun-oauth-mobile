@@ -1,0 +1,14 @@
+page-register {
+  ion-list {
+    ion-item {
+      input {font-size: 1.5rem; width: 100%; padding-left: 3px; border: none;}
+      .error-box {margin-top: 8px;}
+      .row {
+        margin-left: -5px;
+        ion-col:nth-child(1) {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}

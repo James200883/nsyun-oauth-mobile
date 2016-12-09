@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>我的优惠券</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg">
+  <div class="coupon">
+    <div class="stamp stamp03" *ngFor="let cou of couponsData">
+      <div class="par"><p>优惠券</p><sub class="sign">￥</sub><span>{{cou.amount}}</span><sub>元券</sub><p><!-- 订单满100.00元 --></p></div>
+      <div class="copy">有效时间<p><label>{{cou.coupon.startDateStr}}</label><br>至<br><label>{{cou.coupon.endDateStr}}</label></p></div>
+      <i></i>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>会员认证</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="memberCertForm" (submit)="addMemberCert(memberCertForm)" novalidate>
+    <ion-list no-lines>
+      <ion-item>
+        <ion-input type="text" placeholder="真实姓名" [formControl]="realName" [disabled]="flag == '1'"></ion-input>
+      </ion-item>
+      <div class="error-box" *ngIf="realName.hasError('required') && realName.touched">请填写真实姓名</div>
+      <div class="error-box" *ngIf="(realName.hasError('minlength') || realName.hasError('maxlength')) && realName.touched">真实姓名:2-15个字符限制</div>
+      <div class="lines"></div>
+
+      <ion-item>
+        <ion-input type="tel" placeholder="身份证号码" [formControl]="identityNo" [disabled]="flag == '1'"></ion-input>
+      </ion-item>
+      <div class="error-box" *ngIf="identityNo.hasError('required') && identityNo.touched">请填写身份证号码</div>
+      <div class="error-box" *ngIf="(identityNo.hasError('minlength') || identityNo.hasError('maxlength')) && identityNo.touched">身份证号码格式不正确</div>
+      <div class="lines"></div>
+
+      <ion-row>
+        <ion-col width-33><button ion-item no-lines type="button" (click)="selectProvince()"><span>{{provinceName}}</span></button></ion-col>
+        <ion-col width-33><button ion-item no-lines type="button" (click)="selectCities()"><span>{{citiesName}}</span></button></ion-col>
+        <ion-col width-33><button ion-item no-lines type="button" (click)="selectArea()"><span>{{areaName}}</span></button></ion-col>
+      </ion-row>
+      <div class="lines"></div>
+
+      <ion-item>
+        <ion-input type="tel" placeholder="区域编码" [formControl]="addressCode" [disabled]="flag == '1'"></ion-input>
+      </ion-item>
+      <div class="error-box" *ngIf="addressCode.hasError('required') && addressCode.touched">请填写区域编码</div>
+      <div class="error-box" *ngIf="(addressCode.hasError('minlength') || addressCode.hasError('maxlength')) && addressCode.touched">区域编码:6位数字限制</div>
+      <div class="lines"></div>
+
+      <ion-item>
+        <ion-textarea placeholder="详细地址" rows="3" [formControl]="address" [disabled]="flag == '1'"></ion-textarea>
+      </ion-item>
+      <div class="error-box" *ngIf="address.hasError('required') && address.touched">请填写详细地址</div>
+      <div class="error-box" *ngIf="(address.hasError('minlength') || address.hasError('maxlength')) && address.touched">详细地址:5-60个字符限制</div>
+      <div class="lines"></div>
+
+      <ion-item (click)="selectCertShop()">
+        <h2 class="cert-shop">{{shopName}}</h2>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+      <div class="lines"></div>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block type="submit" color="primary" [disabled]="!memberCertForm.valid">保存</button>
+    </div>
+  </form>
+</ion-content>

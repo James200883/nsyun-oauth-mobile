@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar color="light">
+    <ion-buttons start>
+      <button ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>产品参数选择</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="no-border border-bottom">
+    <ion-thumbnail item-left>
+      <img src="{{productInfo.imageUrl}}"/>
+    </ion-thumbnail>
+    <div class="product-option">
+      <h2 class="price" color="danger" margin-top>￥{{price}}</h2>
+      <span color="gray">{{productInfo.name}}</span>
+    </div>
+  </ion-item>
+
+  <div class="border-bottom" padding>
+    <div>规格</div>
+    <div class="item-option" [ngClass]="{'active': skuItem.active}" *ngFor="let skuItem of productInfo.skuItems" (click)="chooseOption(productInfo.skuItems, skuItem)">
+      {{skuItem.name}}
+    </div>
+  </div>
+
+  <div class="border-bottom" padding>
+    <div>数量</div>
+    <div class="input-qty" margin-top>
+      <button ion-button small class="btn" color="light" (click)="quantityCount('minus')">
+        <ion-icon name="ios-remove"></ion-icon>
+      </button>
+      <input type="tel" value="{{quantity}}"/>
+      <button ion-button small class="btn" color="light" (click)="quantityCount('plus')">
+        <ion-icon name="ios-add"></ion-icon>
+      </button>
+      <div class="clear"></div>
+    </div>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block class="btn-add-cart" (click)="closeModal()">取消</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block color="primary" (click)="selectOption()">确定</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,81 @@
+<ion-content class="common-bg">
+  <ion-slides pager [options]="options">
+    <ion-slide *ngFor="let slide of slides">
+      <img src="{{slide.impageUrl}}"/>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-card>
+    <ion-list class="cat-list">
+      <ion-row>
+        <ion-col width-25 (click)="goToOrders()">
+          <button ion-fab color="secondary"><ion-icon name="basket"></ion-icon></button>
+          <div class="fab-txt"><span>我的订单</span></div>
+        </ion-col>
+
+        <ion-col width-25 (click)="goToSales()">
+          <button ion-fab color="green"><ion-icon name="cart"></ion-icon></button>
+          <div class="fab-txt"><span>促销产品</span></div>
+        </ion-col>
+
+        <ion-col width-25 (click)="goToMemberCert()">
+          <button ion-fab color="orange"><ion-icon name="people"></ion-icon></button>
+          <div class="fab-txt"><span>会员认证</span></div>
+        </ion-col>
+
+        <ion-col width-25 (click)="goToMessages()">
+          <button ion-fab color="favorite"><ion-icon name="mail"></ion-icon></button>
+          <div class="fab-txt"><span>我的消息</span></div>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </ion-card>
+
+  <h5 text-center *ngIf="cxData && cxData.length > 0">推荐产品</h5>
+  <ion-list no-margin class="list-full-border list-products grid">
+    <ion-item class="product" *ngFor="let cxItem of cxData" (click)="goProductDetail(cxItem.data.id)">
+      <ion-thumbnail item-left>
+        <img src="{{cxItem.pageAds.impageUrl}}" alt="{{cxItem.data.name}}"/>
+      </ion-thumbnail>
+      <div>
+        <div text-wrap class="ellipsis-text">{{cxItem.data.name}}</div>
+        <div>
+          <span color="danger">￥{{cxItem.data.distPrice}}</span>
+        </div>
+        <div class="origin-price text-sm">
+          <span class="text-decoration">￥{{cxItem.data.price}}</span>
+        </div>
+        <div class="bottom-info text-sm">
+          <span color="gray" class="pull-right">
+            月销{{cxItem.data.countSale}}笔
+          </span>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <h5 text-center *ngIf="fqData && fqData.length > 0">惠农申请</h5>
+  <ion-list no-margin class="list-full-border list-products grid">
+    <ion-item class="product" *ngFor="let fqItem of fqData" (click)="goProductDetail(fqItem.data.id)">
+      <ion-thumbnail item-left>
+        <img src="{{fqItem.pageAds.impageUrl}}" alt="{{fqItem.data.name}}"/>
+      </ion-thumbnail>
+      <div>
+        <div text-wrap class="ellipsis-text">{{fqItem.data.name}}</div>
+        <div>
+          <span color="danger">￥{{fqItem.data.distPrice}}</span>
+        </div>
+        <div class="origin-price text-sm">
+          <span class="text-decoration">￥{{fqItem.data.price}}</span>
+        </div>
+        <div class="bottom-info text-sm">
+          <span color="gray" class="pull-right">
+            月销{{fqItem.data.countSale}}笔
+          </span>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

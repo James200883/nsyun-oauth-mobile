@@ -1,0 +1,10 @@
+page-certShop {
+  ion-list {
+    .item {
+      ion-thumbnail {
+        margin-left: 5px !important;
+        img {width: 7rem; max-width: 8rem; height: 7rem; max-height: 8rem;}
+      }
+    }
+  }
+}

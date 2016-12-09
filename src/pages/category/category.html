@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>产品分类</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg">
+  <ion-grid>
+    <ion-row wrap class="items">
+      <ion-col width-50 (click)="goToProducts('', '所有分类')">
+        <div class="listing">
+          <h2 primary text-center>所有分类</h2>
+        </div>
+      </ion-col>
+      <ion-col width-50 *ngFor="let category of categories" (click)="goToProducts(category.categoryNo, category.name)">
+        <div class="listing">
+          <h2 primary text-center>{{category.name}}</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

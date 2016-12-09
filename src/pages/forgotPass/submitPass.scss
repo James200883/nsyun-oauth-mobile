@@ -1,0 +1,12 @@
+page-submitPass {
+  ion-list {
+    ion-item {
+      input {font-size: 1.5rem; width: 100%; padding-left: 3px; border: none;}
+      .error-box {margin-top: 8px;}
+    }
+  }
+  .tips {
+    margin-left: 2rem;
+    p {overflow: inherit; margin: 0 0 2px; font-size: 1.3rem; line-height: normal; text-overflow: inherit; color: #666}
+  }
+}

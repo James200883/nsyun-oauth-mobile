@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>消息盒子</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding-left padding-top>
+  <ion-list>
+    <ion-item-sliding *ngFor="let message of messages">
+      <ion-item (click)="messageDetail(message.messageBody)">
+        <h2>{{message.messageTitle}}</h2>
+        <p>{{message.messageBody}}</p>
+        <ion-note item-right>{{message.createDateString}}</ion-note>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="delMessage(message.id)">删除</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

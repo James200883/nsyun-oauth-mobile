@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar color="light">
+    <ion-buttons start>
+      <button ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>选择店铺</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let shop of shops" (click)="selectShop(shop)">
+      <ion-thumbnail item-left>
+        <img src="{{shop.imageUrl}}"/>
+      </ion-thumbnail>
+      <h2>{{shop.shopName}}</h2>
+      <p padding-top>{{shop.province}} {{shop.city}} {{shop.area}} {{shop.address}} </p>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,39 @@
+page-orders {
+  ion-segment {margin-top: 3px;}
+  ion-list {
+    margin: 0 0 32px 0;
+    .item {
+      background-color: color($colors, bgColor);
+      .item-inner {
+        background-color: color($colors, bgColor);
+      }
+    }
+
+    .card-header {
+      ion-col {
+        div {
+          font-size: 1.5rem;
+          margin: -1rem 0 0 -1rem;
+        }
+        p {margin: -1rem 0 0 -1rem; color: #f53d3d;}
+      }
+    }
+
+    .card-content {
+      padding: 0 0 14px 0;
+      .item {
+        margin-top: -5px;
+        margin-bottom: 7px;
+        .product-name {font-size: 1.4rem;}
+        .product-price {
+          span {font-size: 1.4rem;}
+        }
+      }
+    }
+
+    .card-footer {
+      ion-col:first-child {margin-left: -5rem;}
+      ion-col:last-child {margin-top: -0.5rem;}
+    }
+  }
+}

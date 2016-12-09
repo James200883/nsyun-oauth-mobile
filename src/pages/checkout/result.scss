@@ -1,0 +1,22 @@
+page-result {
+  ion-grid {
+    ion-row {
+      margin-bottom: 5px;
+      ion-col {
+        ion-icon {
+          font-size: 8rem;
+        }
+      }
+      .result-text {
+        font-size: 2rem;
+        margin-top: -2rem;
+        em {color: #c9a42e;}
+      }
+
+      .options {
+        span {font-size: 1.7rem;}
+        button {margin: -10px -10px 0 -10px;}
+      }
+    }
+  }
+}

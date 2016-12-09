@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>昵称</ion-title>
+    <ion-buttons end>
+      <button ion-button clear color="primary" (click)="saveNickname()">保存</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-input type="text" placeholder="昵称" [(ngModel)]="nickName"></ion-input>
+    </ion-item>
+  </ion-list>
+  <p padding-left class="tips">只允许汉字,字母,数字, 2到10个字符</p>
+</ion-content>

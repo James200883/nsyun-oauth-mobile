@@ -1,0 +1,22 @@
+page-product-details, .item {
+  ion-slides {
+    height: auto;
+    img {float: left;}
+  }
+
+  .product-info {
+    display: inline-block;
+    p {font-size: 1.6rem; font-weight: normal;}
+    .price {font-size: 1.5rem;}
+  }
+
+  .product-desc {margin-top: -2.5rem;}
+
+  .select-args {font-weight: bold; font-size: 1.5rem;}
+
+  .item-stats {
+    ion-col + ion-col {
+      border-left: 1px solid color($colors, bgColor);
+    }
+  }
+}

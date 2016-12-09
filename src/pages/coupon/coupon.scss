@@ -1,0 +1,17 @@
+page-coupon .coupon {width: 100%; margin: 0 auto}
+page-coupon .coupon .stamp * {padding: 0; margin: 0; list-style: none; font-family: "Microsoft YaHei", 'Source Code Pro', Menlo, Consolas, Monaco, monospace;}
+page-coupon .coupon .stamp {width: 387px; height: 120px; padding: 0 10px; margin-bottom: 20px; position: relative; overflow: hidden;}
+page-coupon .coupon .stamp:before {content: ''; position: absolute; top: 0; bottom: 0; left: 10px; right: 10px; z-index: -1;}
+page-coupon .coupon .stamp i {position: absolute; left: 20%; top: 45px; height: 190px; width: 390px; background-color: rgba(255, 255, 255, .15); transform: rotate(-30deg);}
+page-coupon .coupon .stamp .par {float: left; padding: 16px 15px; width: 220px; border-right: 2px dashed rgba(255, 255, 255, .3); text-align: left;}
+page-coupon .coupon .stamp .par p {color: #fff; font-size: 16px; line-height: 21px;}
+page-coupon .coupon .stamp .par span {font-size: 50px; color: #fff; margin-right: 5px; line-height: 65px;}
+page-coupon .coupon .stamp .par .sign {font-size: 34px;}
+page-coupon .coupon .stamp .par sub {position: relative; top: -5px; color: rgba(255, 255, 255, .8);}
+page-coupon .coupon .stamp .copy {display: inline-block; padding: 21px 14px; width: 110px; vertical-align: text-bottom; font-size: 30px; color: rgb(255, 255, 255); text-align: center; line-height: initial;}
+page-coupon .coupon .stamp .copy p {font-size: 16px; margin-top: 15px;}
+page-coupon .coupon .stamp03 {background: radial-gradient(transparent 0, transparent 5px, #7EAB1E 5px); background-size: 15px 15px; background-position: 9px 3px; width: 100%;}
+page-coupon .coupon .stamp03:before {background-color: #7EAB1E;}
+page-coupon .coupon .stamp03 .copy {padding: 10px 6px 10px 12px; font-size: 20px;}
+page-coupon .coupon .stamp03 .copy p {font-size: 14px; margin-top: 5px; margin-bottom: 8px;}
+page-coupon .coupon .stamp03 .copy a {background-color: #fff; color: #333; font-size: 14px; text-decoration: none; padding: 5px 10px; border-radius: 3px; display: block;}

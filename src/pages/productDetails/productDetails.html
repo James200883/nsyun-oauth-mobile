@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="productInfo">{{productInfo.product.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg">
+  <div class="card light-bg">
+    <ion-slides pager [options]="options" class="border-bottom">
+      <ion-slide *ngFor="let imageItem of imageItems">
+        <img src="{{imageItem.imageUrl}}"/>
+      </ion-slide>
+    </ion-slides>
+
+    <div padding-left class="border-bottom product-info" *ngIf="productInfo">
+      <p class="ellipsis-text">{{productInfo.product.name}}</p>
+      <span class="price" color="danger" margin-top>￥{{productInfo.product.distPrice}}</span>
+      <p class="price text-decoration" color="gray" margin-top>￥{{productInfo.product.price}}</p>
+    </div>
+  </div>
+
+  <!--item options-->
+  <div class="card light-bg" margin-top *ngIf="productInfo">
+    <ion-item class="no-border" *ngIf="productInfo.product.skuItems && productInfo.product.skuItems.length > 0">
+      <div>
+        <p color="gray" class="pull-left" *ngIf="!selectedSkuItems || selectedSkuItems.length == 0">未选择</p>
+        <p color="gray" class="pull-left" *ngIf="selectedSkuItems && selectedSkuItems.length > 0">已选:{{selectedSkuItems.join(',')}}</p>
+      </div>
+      <div item-right>
+        <button ion-button clear color="secondary" class="select-args" (click)="showOptions(productInfo.product)">选择产品规格</button>
+      </div>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button block class="btn-add-cart" *ngIf="cateType == '20'" (click)="addToCart()">加入购物车</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block color="primary" *ngIf="cateType == '10'" (click)="doGet()">免费领取</button>
+          <button ion-button block color="primary" *ngIf="cateType == '20'" (click)="doBuy()">立即购买</button>
+          <button ion-button block color="primary" *ngIf="cateType == '30'" (click)="doApply()">申请惠农产品</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!--Description-->
+  <div class="card light-bg" margin-top *ngIf="productInfo">
+    <div class="border-bottom" padding>产品描述</div>
+    <div padding class="product-desc" [innerHTML]="productInfo.information"></div>
+  </div>
+</ion-content>

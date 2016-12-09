@@ -1,0 +1,273 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* hide scrollbar */
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* Nav Bar */
+.toolbar-background {
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #f4f4f4;
+}
+.bar-button-default {
+  color: #8f99a2;
+}
+.toolbar-title {
+  font-size: 1.3rem;
+  color: #323844;
+  text-transform: uppercase;
+}
+
+/* ActionSheet */
+.action-sheet-container {
+  padding: 0 !important;
+}
+.action-sheet-group:last-child {
+  margin-bottom: 0 !important;
+  border-radius: 0 !important;
+}
+.action-sheet-title {
+  color: #fd5459 !important;
+  font-family: 'Open Sans', sans-serif !important;
+  border-bottom: 1px solid #e9e9e9 !important;
+}
+.action-sheet-button {
+  color: #313b44 !important;
+  border-bottom: 1px solid #f3f3f3 !important;
+  font-family: 'Open Sans', sans-serif !important;
+  font-size: 1.4rem !important;
+}
+
+.primary-bg {background-color: color($colors, primary);}
+
+.secondary-bg {background-color: color($colors, secondary);}
+
+.gray-bg {background-color: color($colors, gray);}
+
+.light-bg {background-color: color($colors, light);}
+
+.common-bg {background-color: color($colors, bgColor);}
+
+.padding-xs {padding: 10px;}
+
+.round {border-radius: 3px;}
+
+.full-width {width: 100%;}
+
+.uppercase {text-transform: uppercase;}
+
+.align-bottom {position: absolute; bottom: 0; left: 0; width: 100%;}
+
+.pull-left {float: left;}
+
+.pull-right {float: right;}
+
+.rlt {position: relative;}
+
+.text-lg {font-size: 1.2em;}
+
+.text-sm {font-size: 0.8em;}
+
+.text-mn {font-size: 1.5rem;}
+
+.ellipsis-text {width:100%; overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis; -webkit-text-overflow:ellipsis; -moz-text-overflow:ellipsis; white-space:nowrap;}
+
+.lines {width:100%; height:1px; margin:0px auto; padding:0px; background-color:#D5D5D5; overflow:hidden;}
+
+button.align-left {
+  .button-inner {
+    justify-content: flex-start;
+  }
+}
+
+.card {
+  border-radius: 2px;
+  font-size: 1.4rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  width: 100%;
+}
+
+.error-box {font-size: 1.2rem; color: #ff0000; margin-left: 10px;}
+
+ion-list {
+  .item {
+    padding-left: 0;
+    border-color: color($colors, bgColor);
+    .item-inner {
+      padding-right: 0 !important;
+      border-color: color($colors, bgColor);
+    }
+    ion-label {
+      margin: 0;
+      ion-card {
+        margin: 10px 0 0 0; width: 100%; box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+}
+
+ion-input, ion-textarea {
+  font-size: 1.5rem;
+  padding-left: 10px;
+}
+
+.list-no-border, ion-list.list-no-border {
+  .item:first-child {
+    border: none;
+  }
+  .item:last-child {
+    border: none;
+  }
+  .item-block {
+    .item-inner {
+      border: none;
+    }
+  }
+}
+
+ion-list.list-full-border {
+  @extend .list-no-border;
+  .item,
+  .item:first-child,
+  .item:last-child {
+    border-bottom: 1px solid color($colors, bgColor);
+  }
+}
+
+.list-ios[no-margin],
+.list-md[no-margin],
+.list-wp[no-margin] {
+  margin: 0;
+}
+
+.item.no-border {
+  .item-inner {
+    border: none;
+  }
+}
+
+.border-bottom {
+  border-bottom: 1px solid color($colors, bgColor);
+}
+
+.clear {
+  clear: both;
+}
+
+.grid-no-padding {
+  padding: 0;
+  ion-col:first-child {
+    padding-left: 0;
+  }
+
+  ion-col:last-child {
+    padding-right: 0;
+  }
+}
+
+.list-form {
+  .item {
+    padding-left: 0;
+  }
+  .item:first-child {
+    border-top: 0;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.text-decoration {
+  text-decoration: line-through;
+}
+
+.swiper-pagination-bullet {
+  background: color($colors, light);
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: color($colors, primary);
+}
+
+.profile-picture {
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+}
+
+.list-cards {
+  ion-row {
+    flex-wrap: wrap;
+    ion-col {
+      padding: 6px;
+    }
+  }
+}
+
+.card {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3)
+}
+
+.btn-add-cart, .btn-add-cart.activated {
+  background: #FEE3E1;
+  color: color($colors, primary);
+}
+
+.input-qty {
+  display: inline-block;
+  border-top: 1px solid color($colors, bgColor);
+  border-bottom: 1px solid color($colors, bgColor);
+
+  .btn {
+    border-left: 1px solid color($colors, bgColor);
+    border-right: 1px solid color($colors, bgColor);
+    padding: 6px 12px;
+    float: left;
+    width: 40px;
+  }
+
+  input {
+    padding: 6px;
+    float: left;
+    border: none;
+    text-align: center;
+    max-width: 64px;
+    width: 100%;
+  }
+}
+
+ion-slides[pager] {
+  .swiper-pagination {
+    display: block !important;
+  }
+}
+

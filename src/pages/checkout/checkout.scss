@@ -1,0 +1,69 @@
+page-checkout {
+  ion-list.list-full-border {
+    margin-top: 3px !important;
+    .item {
+      ion-thumbnail {
+        img {
+          width: 6rem;
+          max-width: 6rem;
+          height: 7rem;
+          max-height: 8rem;
+          border: 1px solid #ebebeb;
+          margin-left: 3px;
+        }
+      }
+
+      .text-sm {margin: 5px 0 5px 0;}
+      .price {color: #ff0000; font-size: 1.4rem;}
+      .pull-right {padding-right: 10px;}
+      .o-price {font-size: 1.4rem;}
+      .product-name {font-size: 1.5rem;}
+    }
+  }
+
+  ion-list.ion-pay-list {
+    margin: -2.5rem 0 32px 0;
+    ion-item {
+      font-size: 1.5rem;
+      ion-thumbnail {
+        img {
+          width: 4rem;
+          max-width: 4rem;
+          height: 4rem;
+          max-height: 4rem;
+          margin: 10px 0 0 5px;
+        }
+      }
+    }
+  }
+
+  ion-card.totals {
+    margin-top: -2.3rem;
+    ion-card-content {
+      ion-row {
+        ion-col:nth-child(1) {
+          font-size: 1.6rem;
+        }
+        ion-col:nth-child(2) {
+          color: #ff0000;
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+
+  .cart-footer {
+    background: #FBFBFB;
+    border-top: 1px solid color($colors, bgColor);
+    ion-toolbar {
+      ion-row {
+        ion-col:nth-child(1) {
+          font-size: 1.7rem;
+          font-weight: normal;
+          color: #ff0000;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}

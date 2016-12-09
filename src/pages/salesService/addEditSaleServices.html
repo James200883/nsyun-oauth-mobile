@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>管理售后服务</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form (submit)="addEditSaleService()" novalidate>
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label>选择售后服务:</ion-label>
+        <ion-select [(ngModel)]="type" name="type">
+          <ion-option value="1">安装</ion-option>
+          <ion-option value="2">维修</ion-option>
+          <ion-option value="3">换货</ion-option>
+          <ion-option value="4">其它意见</ion-option>
+        </ion-select>
+      </ion-item>
+      <div class="lines"></div>
+
+      <ion-item>
+        <ion-label>详细地址:</ion-label>
+        <ion-textarea placeholder="详细地址" rows="3" [(ngModel)]="address" name="address"></ion-textarea>
+      </ion-item>
+      <div class="lines"></div>
+
+      <ion-item>
+        <ion-label>详细说明:</ion-label>
+        <ion-textarea placeholder="详细说明" rows="3" [(ngModel)]="info" name="info"></ion-textarea>
+      </ion-item>
+      <div class="lines"></div>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block type="submit" color="primary">保存</button>
+    </div>
+  </form>
+</ion-content>

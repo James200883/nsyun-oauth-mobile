@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>支付结果</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <ion-icon name="ios-checkmark-circle-outline" color="green"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="result-text" text-center><span color="green">成功支付<em>￥{{totals}}元</em></span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center class="options">
+        <span>您可以</span>
+        <button ion-button clear color="secondary" (click)="toToOrder()">查看该订单</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

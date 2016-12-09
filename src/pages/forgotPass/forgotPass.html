@@ -1,0 +1,36 @@
+<ion-header padding-top>
+  <ion-navbar>
+    <ion-title>找回密码</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding-left padding-top>
+  <form [formGroup]="forgotPassForm" (submit)="nextStep(forgotPassForm)">
+    <ion-list class="ion-list">
+      <ion-item>
+        <ion-icon name="phone-portrait"></ion-icon>
+        <input type="tel" placeholder="手机号码" [formControl]="mobile"/>
+        <ion-icon name="close" item-right [hidden]="mobile.value.length == 0" (tap)="clearInput(forgotPassForm, 'mobile')"></ion-icon>
+        <div class="error-box" *ngIf="mobile.hasError('required') && mobile.touched">请填写手机号码</div>
+        <div class="error-box" *ngIf="mobile.hasError('pattern') && !mobile.hasError('required') && mobile.touched">手机号码格式不正确</div>
+      </ion-item>
+
+      <ion-item>
+        <ion-row class="row">
+          <ion-col width-50>
+            <ion-icon name="paper" class="code-icon"></ion-icon>
+            <input type="tel" placeholder="验证码" [formControl]="codes"/>
+            <div class="error-box" *ngIf="codes.hasError('required') && codes.touched">然而验证码并不正确</div>
+          </ion-col>
+          <ion-col width-50>
+            <button ion-button block color="primary" class="btn-code" [disabled]="!mobile.valid || isBtnCode" (tap)="getCodes(mobile.value)">{{btnCode}}</button>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block type="submit" color="primary" [disabled]="!forgotPassForm.valid">下一步</button>
+    </div>
+  </form>
+</ion-content>

@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>我</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="personal-header" text-center *ngIf="userInfoData">
+    <img *ngIf="userInfoData.imageUrl" src="{{userInfoData.imageUrl}}"/>
+    <img *ngIf="!userInfoData.imageUrl" src="assets/images/head.png"/>
+    <p>{{userInfoData.realname}}</p>
+  </div>
+
+  <div class="personal-header" text-center *ngIf="!userInfoData" (click)="goToLogin()">
+    <img src="assets/images/head.png"/>
+    <p>点击登录</p>
+  </div>
+
+  <div class="settings">
+    <ion-list inset>
+      <ion-item (click)="openItems(1)">
+        <ion-icon name="ios-basket-outline" item-left></ion-icon>
+        <h2>我的订单</h2>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+
+      <ion-item (click)="openItems(2)">
+        <ion-icon name="ios-locate-outline" item-left></ion-icon>
+        <h2>我的收货地址</h2>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+
+      <ion-item (click)="openItems(3)">
+        <ion-icon name="ios-cash-outline" item-left></ion-icon>
+        <h2>我的优惠券</h2>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+
+      <ion-item (click)="openItems(4)">
+        <ion-icon name="ios-person-outline" item-left></ion-icon>
+        <h2>我推荐的会员</h2>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+
+      <ion-item (click)="openItems(5)">
+        <ion-icon name="ios-people-outline" item-left></ion-icon>
+        <h2>会员认证</h2>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+
+      <ion-item (click)="openItems(6)">
+        <ion-icon name="ios-browsers-outline" item-left></ion-icon>
+        <h2>售后服务</h2>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+
+      <ion-item (click)="openItems(7)">
+        <ion-icon name="ios-mail-outline" item-left></ion-icon>
+        <h2>我的消息</h2>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+
+      <ion-item (click)="openItems(8)">
+        <ion-icon name="ios-body-outline" item-left></ion-icon>
+        <h2>关于我们</h2>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+
+      <ion-item (click)="openItems(9)">
+        <ion-icon name="ios-settings-outline" item-left></ion-icon>
+        <h2>设置</h2>
+        <ion-icon name="arrow-forward" item-right></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

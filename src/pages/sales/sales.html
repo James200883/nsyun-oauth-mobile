@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>分类 - {{categoryName}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg">
+  <ion-row class="sales-header" *ngIf="products && products.length > 0">
+    <ion-col width-50 (click)="sortBySaleCount()">
+      <p>销量</p>
+    </ion-col>
+    <ion-col width-50 (click)="sortByPrice()">
+      <p>价格</p>
+    </ion-col>
+  </ion-row>
+
+  <ion-list no-margin class="list-full-border list-products grid">
+    <ion-item class="product" *ngFor="let product of products" (click)="productDetails(product.id)">
+      <ion-thumbnail item-left>
+        <img src="{{product.imageUrl}}" alt="{{product.name}}"/>
+      </ion-thumbnail>
+      <div>
+        <div text-wrap class="ellipsis-text">{{product.name}}</div>
+        <div>
+          <span color="danger">￥{{product.distPrice}}</span>
+        </div>
+        <div class="origin-price text-sm">
+          <span class="text-decoration">￥{{product.price}}</span>
+        </div>
+        <div class="bottom-info text-sm">
+          <span color="gray" class="pull-right">
+            <p *ngIf="product.countSale">月销{{product.countSale}}笔</p>
+            <p *ngIf="!product.countSale">月销0笔</p>
+          </span>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

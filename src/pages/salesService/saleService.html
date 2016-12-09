@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>我的售后服务</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg">
+  <ion-list>
+    <ion-item *ngFor="let saleService of saleServices">
+      <ion-card>
+        <ion-card-header>
+          <ion-row>
+            <ion-col width-33>{{saleService.statusString}}</ion-col>
+            <ion-col width-33>{{saleService.typeString}}</ion-col>
+            <ion-col width-33 text-right>{{saleService.createDateString}}</ion-col>
+          </ion-row>
+        </ion-card-header>
+        <ion-card-content>
+          <div *ngIf="saleService.info">信息: {{saleService.info}}</div>
+          <div *ngIf="saleService.address">地址: {{saleService.address}}</div>
+          <div *ngIf="saleService.infoDeal">处理信息: {{saleService.infoDeal}}</div>
+        </ion-card-content>
+      </ion-card>
+      <button ion-button outline small color="secondary" class="pull-right" *ngIf="saleService.status == '0'" (click)="addOrEdit(saleService.id)">编辑</button>
+      <button ion-button outline small color="primary" class="pull-right" *ngIf="saleService.status == '0'" (click)="delSaleService(saleService.id)">删除</button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar no-border>
+    <button ion-button block color="primary" (click)="addOrEdit(null)">申请售后服务</button>
+  </ion-toolbar>
+</ion-footer>

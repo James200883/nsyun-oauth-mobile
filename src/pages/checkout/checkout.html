@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>填写订单</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg">
+  <button ion-item no-lines color="light" *ngIf="!addressInfo" (click)="goAddress()">
+    <span padding-left class="text-mn">选择收货地址</span>
+  </button>
+
+  <button ion-item no-lines color="light" *ngIf="addressInfo" (click)="goAddress()">
+    <ion-row>
+      <ion-col width-50><span class="text-mn">收货人: {{addressInfo.contactUserName}}</span></ion-col>
+      <ion-col width-50><span class="text-mn">{{addressInfo.contractTel}}</span></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><span class="text-mn">收货地址: {{addressInfo.province}}{{addressInfo.city}}{{addressInfo.area}}{{addressInfo.address}}</span></ion-col>
+    </ion-row>
+  </button>
+
+  <ion-list class="list-full-border">
+    <ion-item class="product" *ngFor="let item of orderItems">
+      <ion-thumbnail item-left>
+        <img src="{{item.imageUrl}}"/>
+      </ion-thumbnail>
+      <div>
+        <div text-wrap class="product-name">{{item.name}}</div>
+        <div class="text-sm">
+          <span color="gray" *ngIf="item.sku">{{item.sku}}</span>
+        </div>
+        <div padding-bottom>
+          <span class="pull-left o-price" color="gray">￥{{item.distPrice}} x {{item.qty}}</span>
+          <span class="pull-right price">￥{{item.distPrice * item.qty}}</span>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-list radio-group no-lines class="ion-pay-list">
+    <ion-item>
+      <ion-thumbnail item-left class="pay-image">
+        <img src="assets/images/alipay-logo-90x90.png"/>
+      </ion-thumbnail>
+      <ion-label>支付宝</ion-label>
+      <ion-radio checked="true" value="1" (click)="selectPayType('1')"></ion-radio>
+    </ion-item>
+    <div class="lines"></div>
+
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img src="assets/images/weixin-logo.jpg"/>
+      </ion-thumbnail>
+      <ion-label><h2>微信</h2></ion-label>
+      <ion-radio value="2" (click)="selectPayType('2')"></ion-radio>
+    </ion-item>
+  </ion-list>
+
+  <ion-card class="totals">
+    <ion-card-content>
+      <ion-row>
+        <ion-col width-75>商品金额</ion-col>
+        <ion-col width-25 text-right><span>￥{{orderInfos.amount}}</span></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-75>运费</ion-col>
+        <ion-col width-25 text-right>￥0.00</ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer class="cart-footer">
+  <ion-toolbar no-border-bottom>
+    <ion-row>
+      <ion-col width-50 text-left>实付款: <span>￥{{orderInfos.amount}}</span></ion-col>
+      <ion-col width-50>
+        <button ion-button block color="danger" (click)="submitOrder()">支付</button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
