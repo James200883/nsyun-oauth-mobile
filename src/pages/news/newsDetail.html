@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>资讯详情</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg">
+  <ion-card *ngIf="newsDetail">
+    <ion-card-header>{{newsDetail.blog.title}}</ion-card-header>
+    <ion-card-content>
+      <ion-card-title>
+        <ion-row>
+          <ion-col width-50>
+            编辑: {{newsDetail.blog.author}}
+          </ion-col>
+          <ion-col width-50>
+            时间: {{newsDetail.blog.publishDateString}}
+          </ion-col>
+        </ion-row>
+      </ion-card-title>
+      <p [innerHTML]="newsDetail.information"></p>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small icon-left color="gray" (click)="addCount('like')">
+          <ion-icon name='thumbs-up'></ion-icon>
+          <span *ngIf="newsDetail.blog.countLike > 0">{{newsDetail.blog.countLike}}</span>
+          赞
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button clear small icon-left color="gray" (click)="addCount('wish')">
+          <ion-icon name='heart'></ion-icon>
+          <span *ngIf="newsDetail.blog.countWish > 0">{{newsDetail.blog.countWish}}</span>
+          喜欢
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+</ion-content>

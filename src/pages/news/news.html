@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>资讯列表</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="common-bg">
+  <ion-segment color="primary" [(ngModel)]="flag">
+    <ion-segment-button value="0" (click)="searchNews('-1')">
+      全部
+    </ion-segment-button>
+    <ion-segment-button value="1" (click)="searchNews('1')">
+      资讯新闻
+    </ion-segment-button>
+    <ion-segment-button value="2" (click)="searchNews('2')">
+      惠农政策
+    </ion-segment-button>
+    <ion-segment-button value="3" (click)="searchNews('3')">
+      农业科技
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="flag">
+    <ion-list *ngSwitchCase="'0'">
+      <ion-item *ngFor="let n of news" (click)="goToDetail(n.id)">
+        <ion-thumbnail item-left>
+          <img src="{{n.imageUrl}}"/>
+        </ion-thumbnail>
+        <h2 text-wrap class="ellipsis-text">{{n.title}}</h2>
+        <p>
+          <ion-row>
+            <ion-col width-25>{{n.blogCategory.name}}</ion-col>
+            <ion-col width-25>{{n.author}}</ion-col>
+            <ion-col width-50>{{n.publishDateString}}</ion-col>
+          </ion-row>
+        </p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'1'">
+      <ion-item *ngFor="let n of news" (click)="goToDetail(n.id)">
+        <ion-thumbnail item-left>
+          <img src="{{n.imageUrl}}"/>
+        </ion-thumbnail>
+        <h2 text-wrap class="ellipsis-text">{{n.title}}</h2>
+        <p>
+          <ion-row>
+            <ion-col width-25>{{n.blogCategory.name}}</ion-col>
+            <ion-col width-25>{{n.author}}</ion-col>
+            <ion-col width-50>{{n.publishDateString}}</ion-col>
+          </ion-row>
+        </p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'2'">
+      <ion-item *ngFor="let n of news" (click)="goToDetail(n.id)">
+        <ion-thumbnail item-left>
+          <img src="{{n.imageUrl}}"/>
+        </ion-thumbnail>
+        <h2 text-wrap class="ellipsis-text">{{n.title}}</h2>
+        <p>
+          <ion-row>
+            <ion-col width-25>{{n.blogCategory.name}}</ion-col>
+            <ion-col width-25>{{n.author}}</ion-col>
+            <ion-col width-50>{{n.publishDateString}}</ion-col>
+          </ion-row>
+        </p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'3'">
+      <ion-item *ngFor="let n of news" (click)="goToDetail(n.id)">
+        <ion-thumbnail item-left>
+          <img src="{{n.imageUrl}}"/>
+        </ion-thumbnail>
+        <h2 text-wrap class="ellipsis-text">{{n.title}}</h2>
+        <p>
+          <ion-row>
+            <ion-col width-25>{{n.blogCategory.name}}</ion-col>
+            <ion-col width-25>{{n.author}}</ion-col>
+            <ion-col width-50>{{n.publishDateString}}</ion-col>
+          </ion-row>
+        </p>
+      </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="hasMore">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中...."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

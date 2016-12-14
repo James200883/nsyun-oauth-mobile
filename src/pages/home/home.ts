@@ -8,7 +8,7 @@ import {OrdersPage} from "../orders/orders";
 import {LoginPage} from "../login/login";
 import {SalesPage} from "../sales/sales";
 import {MemberCertPage} from "../memberCert/memberCert";
-import {MessagesPage} from "../message/message";
+import {NewsPage} from "../news/news";
 
 @Component({
   selector: 'page-home',
@@ -67,14 +67,8 @@ export class HomePage {
   }
 
   //跳转至我的消息
-  public goToMessages () {
-    this.storage.get(Keys.USER_INFO_KEY).then((userInfo) => {
-      if (userInfo) {
-        this.navCtrl.push(MessagesPage, {userId: userInfo.id});
-      } else {
-        this.goToLogin();
-      }
-    });
+  public goToNews () {
+    this.navCtrl.push(NewsPage);
   }
 
   //跳转登陆

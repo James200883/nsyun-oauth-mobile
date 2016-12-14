@@ -1,0 +1,20 @@
+page-news {
+  ion-segment {margin-top: 3px;}
+  div {
+    margin-top: 3px;
+    ion-list {
+      ion-item {
+        ion-thumbnail {
+          margin: 8px 10px 8px 5px !important;
+          img {
+            width: 6rem;
+            max-width: 6rem;
+            height: 6rem;
+            max-height: 6rem;
+          }
+        }
+        p {margin-top: 1.5rem !important;}
+      }
+    }
+  }
+}

@@ -37,6 +37,8 @@ import {UserCartService} from "../commons/services/UserCartService";
 import {SelectAddressPage} from "../pages/checkout/selectAddress";
 import {PayResultPage} from "../pages/checkout/result";
 import {SubmitPassPage} from "../pages/forgotPass/submitPass";
+import {NewsPage} from "../pages/news/news";
+import {NewsDetailPage} from "../pages/news/newsDetail";
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import {SubmitPassPage} from "../pages/forgotPass/submitPass";
     CheckOutPage,
     SelectAddressPage,
     PayResultPage,
-    SubmitPassPage
+    SubmitPassPage,
+    NewsPage,
+    NewsDetailPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -119,7 +123,9 @@ import {SubmitPassPage} from "../pages/forgotPass/submitPass";
     CheckOutPage,
     SelectAddressPage,
     PayResultPage,
-    SubmitPassPage
+    SubmitPassPage,
+    NewsPage,
+    NewsDetailPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, DialogsServices, Storage, UserCartService]
 })
