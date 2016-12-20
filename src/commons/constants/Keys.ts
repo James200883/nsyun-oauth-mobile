@@ -5,7 +5,7 @@ export class Keys {
 
   static SERVICE_URL: string = 'http://www.yoxyc.com:90/nsyun-oauth-server';
 
-  //static SERVICE_URL: string = 'http://192.168.1.128:9080/nsyun-oauth-server';
+  //static SERVICE_URL: string = 'http://192.168.1.120:9080/nsyun-oauth-server';
 
   static USER_CART_KEY:string ='user_cart';
 

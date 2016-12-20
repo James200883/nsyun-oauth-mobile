@@ -1,10 +1,13 @@
 import {Component} from "@angular/core";
-import {NavParams, LoadingController, ModalController, ToastController, NavController} from "ionic-angular";
+import {
+  NavParams, LoadingController, ModalController, ToastController, NavController,
+  AlertController
+} from "ionic-angular";
 import {URLSearchParams, Http} from "@angular/http";
 import {DialogsServices} from "../../commons/services/DialogsServices";
 import {Keys} from "../../commons/constants/Keys";
 import {SelectAddressPage} from "./selectAddress";
-import {AliPay} from "ionic-native";
+import {AliPay, WeiXinPay} from "ionic-native";
 import {PayResultPage} from "./result";
 
 @Component({
@@ -20,7 +23,7 @@ export class CheckOutPage {
   public orderInfos: any = {};
   public orderItems: any = [];
 
-  constructor (private navCtrl: NavController, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private toastCtrl: ToastController, private navParams: NavParams, private http: Http, private dialogsService: DialogsServices) {
+  constructor (private navCtrl: NavController, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private modalCtrl: ModalController, private toastCtrl: ToastController, private navParams: NavParams, private http: Http, private dialogsService: DialogsServices) {
     this.userId = navParams.get('userId');
     this.orderId = navParams.get('orderId');
   }
@@ -86,6 +89,9 @@ export class CheckOutPage {
     if (this.payType == '1') { // 支付宝支付
       this.aliPay();
     }
+    if (this.payType == '2') { // 微信支付
+      this.wxPay();
+    }
   }
 
   //支付宝支付
@@ -113,6 +119,28 @@ export class CheckOutPage {
           this.dialogsService.showToast('支付失败', this.toastCtrl);
         }
       });
+    });
+  }
+
+  //微信支付
+  private wxPay () {
+    let params = new URLSearchParams();
+    params.set('productName', this.orderInfos.items[0].name);
+    params.set('productId', this.orderInfos.items[0].id);
+    params.set('orderNo', this.orderInfos.orderNo);
+    params.set('totalFee', this.orderInfos.amount);
+
+    let loading = this.dialogsService.showLoading(this.loadingCtrl);
+    this.http.post(Keys.SERVICE_URL + '/wxPay/unifiedorder', {headers: Keys.HEADERS}, {search: params}).subscribe((res) => {
+      let result = res.json();
+      loading.dismiss();
+
+      if (result.prepayid) {
+        WeiXinPay.payment(result).then((payRes) => {
+        });
+      } else {
+        this.dialogsService.showToast(result.err_code_des, this.toastCtrl);
+      }
     });
   }
 }
